@@ -25,5 +25,11 @@ public abstract class BankAccount {
 
     }
 
+    public String getAccountNumber() {
+        return accountNumber;
+    }
 
+    public double getAmount() {
+        return amount;
+    }
 }
