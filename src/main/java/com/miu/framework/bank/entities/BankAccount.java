@@ -9,16 +9,16 @@ public abstract class BankAccount {
     private String city;
     private String state;
     private String zip;
-    private Date birthdate;
 
-    public BankAccount(String accountNumber, double amount, String street, String city, String state, String zip, Date birthdate) {
+
+    public BankAccount(String accountNumber, double amount, String street, String city, String state, String zip) {
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.street = street;
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.birthdate = birthdate;
+
     }
 
     public abstract void createAccount(String accountNumber);
@@ -42,9 +42,6 @@ public abstract class BankAccount {
         return zip;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
-    }
 
     public void deposit(double amount) {
 
