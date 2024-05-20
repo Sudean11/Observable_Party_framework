@@ -1,19 +1,19 @@
 package com.miu.framework.bank.entities;
 
 public class PersonalBankAccount extends BankAccount {
-    private Person person;
-    public PersonalBankAccount(String accountNumber, Person ownre) {
+
+    public PersonalBankAccount(String accountNumber) {
         super(accountNumber);
-        person = ownre;
+
+    }
+
+    @Override
+    public void createAccount(String accountNumber) {
+
     }
 
     @Override
     public void addInterest() {
-
-    }
-
-    @Override
-    public void notifyParties() {
 
     }
 }
