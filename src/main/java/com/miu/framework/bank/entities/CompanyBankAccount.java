@@ -1,8 +1,10 @@
 package com.miu.framework.bank.entities;
 
+import com.miu.framework.common.entity.Account;
+
 import java.util.Date;
 
-public abstract class CompanyBankAccount extends BankAccount {
+public abstract class CompanyBankAccount extends Account {
 
     private int numberOfEmployee;
 

@@ -1,7 +1,5 @@
 package com.miu.framework.bank.entities;
 
-import java.util.Date;
-
 public class SavingBankAccount extends CompanyBankAccount {
 
 

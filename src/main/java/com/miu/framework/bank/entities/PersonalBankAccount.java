@@ -1,8 +1,10 @@
 package com.miu.framework.bank.entities;
 
+import com.miu.framework.common.entity.Account;
+
 import java.util.Date;
 
-public class PersonalBankAccount extends BankAccount {
+public class PersonalBankAccount extends Account {
     private Date birthdate;
 
     public PersonalBankAccount(String accountNumber, double amount, String street, String city, String state, String zip, Date birthdate, String email) {
