@@ -1,7 +1,4 @@
-package edu.mum.cs.cs525.labs.exercises.project.ui.ccard;
-import java.awt.*;
-import javax.swing.*;
-
+package com.miu.framework.creditCard.ui;
 
 
 public class JDialog_Withdraw extends javax.swing.JDialog

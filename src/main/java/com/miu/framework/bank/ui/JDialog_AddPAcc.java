@@ -1,10 +1,7 @@
-package edu.mum.cs.cs525.labs.exercises.project.ui.bank;
+package com.miu.framework.bank.ui;
 /*
 		A basic implementation of the JDialog class.
 */
-
-import java.awt.*;
-import javax.swing.*;
 
 public class JDialog_AddPAcc extends javax.swing.JDialog
 {

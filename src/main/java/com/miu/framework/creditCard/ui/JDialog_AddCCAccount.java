@@ -1,4 +1,4 @@
-package edu.mum.cs.cs525.labs.exercises.project.ui.ccard;
+package com.miu.framework.creditCard.ui;
 /*
 		A basic implementation of the JDialog class.
 */
