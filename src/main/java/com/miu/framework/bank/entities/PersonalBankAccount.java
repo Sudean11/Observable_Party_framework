@@ -4,7 +4,7 @@ import com.miu.framework.common.entity.Account;
 
 import java.util.Date;
 
-public class PersonalBankAccount extends Account {
+public class PersonalBankAccount extends BankAccount {
     private Date birthdate;
 
     public PersonalBankAccount(String accountNumber, double amount, String street, String city, String state, String zip, Date birthdate, String email) {
