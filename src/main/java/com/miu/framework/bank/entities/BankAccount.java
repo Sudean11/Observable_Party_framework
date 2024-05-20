@@ -9,15 +9,17 @@ public abstract class BankAccount {
     private String city;
     private String state;
     private String zip;
+    private String email;
 
 
-    public BankAccount(String accountNumber, double amount, String street, String city, String state, String zip) {
+    public BankAccount(String accountNumber, double amount, String street, String city, String state, String zip,String email) {
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.street = street;
         this.city = city;
         this.state = state;
         this.zip = zip;
+        this.email = email;
 
     }
 
@@ -61,5 +63,9 @@ public abstract class BankAccount {
 
     public double getAmount() {
         return amount;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
