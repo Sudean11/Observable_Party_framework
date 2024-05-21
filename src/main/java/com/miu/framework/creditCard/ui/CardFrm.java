@@ -27,7 +27,6 @@ public class CardFrm extends javax.swing.JFrame
     CardFrm thisframe;
     private Object rowdata[];
 
-	private Command createAccountCommand = new CreateAccountCommand(new BankService());
 	private Command depositeCommand = new DepositeCommand(new BankService());
 	private Command generateReportCommand = new GenerateReportCommand(new BankService());
 	private Command withdrawCommand = new WithdrawCommand(new BankService());
@@ -218,7 +217,7 @@ public class CardFrm extends javax.swing.JFrame
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
         }
-		createAccountCommand.execute();
+//		createAccountCommand.execute();
        
         
     }

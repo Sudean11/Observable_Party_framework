@@ -1,4 +1,4 @@
-package com.miu.framework.creditCard.Service;
+package com.miu.framework.creditCard.service;
 
 import com.miu.framework.common.entity.Account;
 

@@ -1,6 +1,8 @@
 package com.miu.framework.bank.ui;
 
 import com.miu.framework.common.command.*;
+import com.miu.framework.common.constants.BankAccountType;
+import com.miu.framework.common.service.AccountService;
 import com.miu.framework.common.service.BankService;
 
 import java.awt.*;
@@ -15,7 +17,8 @@ public class BankFrm extends javax.swing.JFrame
     /****
      * init variables in the object
      ****/
-    String accountnr, clientName,street,city,zip,state,accountType,clientType,amountDeposit;
+    String accountnr, clientName,street,city,zip,state,clientType,amountDeposit;
+	BankAccountType accountType;
     boolean newaccount;
     private DefaultTableModel model;
     private JTable JTable1;
@@ -23,10 +26,10 @@ public class BankFrm extends javax.swing.JFrame
     BankFrm myframe;
     private Object rowdata[];
 
-	private Command addInterestCommand = new AddInterestCommand(new BankService());
-	private Command createAccountCommand = new CreateAccountCommand(new BankService());
-	private Command depositeCommand = new DepositeCommand(new BankService());
-	private Command withdrawCommand = new WithdrawCommand(new BankService());
+	AccountService bankService = new BankService();
+	private Command addInterestCommand = new AddInterestCommand(bankService, "");
+	private Command depositeCommand = new DepositeCommand(bankService);
+	private Command withdrawCommand = new WithdrawCommand(bankService);
     
 	public BankFrm()
 	{
@@ -208,7 +211,7 @@ public class BankFrm extends javax.swing.JFrame
 		 set the boundaries and show it 
 		*/
 		
-		JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe);
+		JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe, bankService);
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
 
@@ -221,11 +224,12 @@ public class BankFrm extends javax.swing.JFrame
             rowdata[4] = accountType;
             rowdata[5] = "0";
             model.addRow(rowdata);
-            JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
+
+			JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
         }
 
-       createAccountCommand.execute();
+//       createAccountCommand.execute();
         
     }
 
@@ -237,7 +241,7 @@ public class BankFrm extends javax.swing.JFrame
 		 show it 
 		*/
 		
-		JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
+		JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe, bankService);
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
 		
@@ -250,10 +254,11 @@ public class BankFrm extends javax.swing.JFrame
             rowdata[4] = accountType;
             rowdata[5] = "0";
             model.addRow(rowdata);
+
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
+
         }
-		createAccountCommand.execute();
 	}
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event)

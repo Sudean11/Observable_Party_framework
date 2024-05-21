@@ -1,10 +1,10 @@
-package com.miu.framework.creditCard.Service;
+package com.miu.framework.creditCard.service;
 
 
 import com.miu.framework.common.entity.Account;
+import com.miu.framework.common.service.AccountService;
 import com.miu.framework.creditCard.Repositories.AccountDAO;
 import com.miu.framework.creditCard.Factory.AccountDAOAndServiceFactory;
-import com.miu.framework.creditCard.entities.CreditAccount;
 
 import java.util.Collection;
 
@@ -52,5 +52,10 @@ public class AccountServiceImpl implements AccountService {
 		Account account = accountDAO.loadAccount(accountNumber);
 		//account.addInterest();
 		accountDAO.updateAccount(account);
+	}
+
+	@Override
+	public void deposit() {
+
 	}
 }

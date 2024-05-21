@@ -14,9 +14,4 @@ public class DepositeCommand implements Command {
         System.out.println("Deposite Command");
         accountService.deposit();
     }
-
-    @Override
-    public void undo() {
-        accountService.withdraw();
-    }
 }
