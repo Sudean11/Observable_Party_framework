@@ -1,7 +1,6 @@
 package com.miu.framework.bank.ui;
 
 import com.miu.framework.common.command.*;
-import com.miu.framework.common.service.BankService;
 
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;

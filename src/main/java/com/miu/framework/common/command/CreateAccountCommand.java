@@ -12,7 +12,7 @@ public class CreateAccountCommand implements Command{
     @Override
     public void execute() {
         System.out.println("Create Account");
-        accountService.createAccount();
+//        accountService.createAccount();
     }
 
     @Override

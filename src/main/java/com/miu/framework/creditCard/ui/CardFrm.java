@@ -1,7 +1,6 @@
 package com.miu.framework.creditCard.ui;
 
 import com.miu.framework.common.command.*;
-import com.miu.framework.common.service.BankService;
 
 import java.awt.BorderLayout;
 
