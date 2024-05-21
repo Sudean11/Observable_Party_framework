@@ -1,69 +1,38 @@
 package com.miu.framework.common.entity;
 
+import com.miu.framework.bank.entities.Transaction;
+import com.miu.framework.bank.entities.TransactionType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+// Account Class
 public abstract class Account {
-    private String accountNumber;
-    private double amount;
-    private String street;
-    private String city;
-    private String state;
-    private String zip;
-    private String email;
+    protected String accountNumber;
+    protected double balance;
+    protected Party owner;
+    protected List<Transaction> transactionHistory = new ArrayList<>();
 
-
-    public Account(String accountNumber, double amount, String street, String city, String state, String zip,String email) {
+    public Account(String accountNumber, Party owner) {
         this.accountNumber = accountNumber;
-        this.amount = amount;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.email = email;
-
+        this.owner = owner;
+        this.balance = 0;
     }
 
-    public abstract void createAccount(String accountNumber);
-    public void withdraw(double amount) {
+    public abstract void deposit(double amount);
+    public abstract void withdraw(double amount);
 
+    public double getBalance() {
+        return balance;
     }
 
-    public String getStreet() {
-        return street;
+    public List<Transaction> getTransactionHistory() {
+        return transactionHistory;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
-
-    public void deposit(double amount) {
-
-    }
-
-
-    public abstract void addInterest();
-
-    public void generateReport(){
-
-
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public String getEmail() {
-        return email;
+    public void addTransaction(Transaction transaction) {
+        transactionHistory.add(transaction);
     }
 }
+
