@@ -12,11 +12,7 @@ public class DepositeCommand implements Command {
     @Override
     public void execute() {
         System.out.println("Deposite Command");
-//        accountService.deposit();
+        accountService.deposit();
     }
 
-    @Override
-    public void undo() {
-//        accountService.withdraw();
-    }
 }
