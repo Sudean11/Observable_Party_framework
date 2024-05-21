@@ -1,23 +1,23 @@
 package com.miu.framework.creditCard.entities;
 
 import com.miu.framework.common.entity.Account;
+import com.miu.framework.common.entity.Party;
 
 import java.util.Date;
 
 public class CreditAccount extends Account {
-    private Date birthdate;
-    public CreditAccount(String accountNumber, double amount, String street, String city, String state, String zip, Date birthdate, String email) {
-        super(accountNumber, amount, street, city, state, zip,email);
-        this.birthdate = birthdate;
+
+    public CreditAccount(String accountNumber, Party owner) {
+        super(accountNumber, owner);
     }
 
     @Override
-    public void createAccount(String accountNumber) {
+    public void deposit(double amount) {
 
     }
 
     @Override
-    public void addInterest() {
+    public void withdraw(double amount) {
 
     }
 }

@@ -18,9 +18,10 @@ public class AccountServiceImpl implements AccountService {
 
 
 	public Account createAccount(String accountNumber, String name,double amount) {
-		Account account = new CreditAccount(accountNumber,name,amount);
-		accountDAO.save(account);
-		return account;
+//		Account account = new CreditAccount(accountNumber, name, amount);
+//		accountDAO.save(account);
+//
+	return null;
 	}
 
 	public void deposit(String accountNumber, double amount) {
@@ -49,7 +50,7 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public void addInterest(String accountNumber) {
 		Account account = accountDAO.loadAccount(accountNumber);
-		account.addInterest();
+		//account.addInterest();
 		accountDAO.updateAccount(account);
 	}
 }
