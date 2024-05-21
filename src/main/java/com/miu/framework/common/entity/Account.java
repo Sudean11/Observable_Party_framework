@@ -1,13 +1,12 @@
 package com.miu.framework.common.entity;
 
 import com.miu.framework.bank.entities.Transaction;
-import com.miu.framework.bank.entities.TransactionType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-// Account Class
+
+
 public abstract class Account {
     protected String accountNumber;
     protected double balance;
