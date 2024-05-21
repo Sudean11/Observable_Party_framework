@@ -14,7 +14,7 @@ public class AddInterestCommand implements Command {
     @Override
     public void execute() {
         System.out.println("Add Interest");
-        accountService.addInterest(accountNumber);
+        accountService.addInterest();
     }
 
    public void setAccountNumber(String accountNumber) {

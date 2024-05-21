@@ -2,27 +2,17 @@ package com.miu.framework.bank.entities;
 
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.entity.Party;
+import com.miu.framework.common.utils.Constants;
 
-public class SavingsAccount extends Account {
-    private static final double INTEREST_RATE = 0.02;
-    public SavingsAccount(String accountNumber, Party owner) {
-        super(accountNumber, owner);
+public class SavingsAccount implements AccountTypeStrategy{
+    private static final double INTEREST_RATE = Constants.SAVINGS_ACCOUNT_INTEREST;
+
+    @Override
+    public double calculateInterest(double amount) {
+        return amount * INTEREST_RATE/100;
     }
     @Override
-    public void deposit(double amount) {
-        balance += amount;
-        addTransaction(new Transaction(amount, TransactionType.DEPOSIT ));
+    public void notifyUsers() {
 
     }
-    @Override
-    public void withdraw(double amount) {
-        balance -= amount;
-        addTransaction(new Transaction(amount, TransactionType.WITHDRAWAL));
-    }
-    public void addInterest() {
-        double interest = balance * INTEREST_RATE;
-        deposit(interest);
-    }
-
-
 }

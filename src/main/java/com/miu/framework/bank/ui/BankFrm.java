@@ -1,9 +1,10 @@
 package com.miu.framework.bank.ui;
 
+import com.miu.framework.common.Factory.DAOAndServiceImpl;
 import com.miu.framework.common.command.*;
 import com.miu.framework.common.constants.BankAccountType;
 import com.miu.framework.common.service.AccountService;
-import com.miu.framework.common.service.BankService;
+import com.miu.framework.common.service.AccountServiceImpl;
 
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
@@ -26,10 +27,10 @@ public class BankFrm extends javax.swing.JFrame
     BankFrm myframe;
     private Object rowdata[];
 
-	AccountService bankService = new BankService();
+	AccountService bankService = new AccountServiceImpl(new DAOAndServiceImpl());
 	private Command addInterestCommand = new AddInterestCommand(bankService, "");
 	private Command depositeCommand = new DepositeCommand(bankService);
-	private Command withdrawCommand = new WithdrawCommand(bankService);
+//	private Command withdrawCommand = new WithdrawCommand(bankService);
     
 	public BankFrm()
 	{
@@ -307,7 +308,7 @@ public class BankFrm extends javax.swing.JFrame
 		       JOptionPane.showMessageDialog(JButton_Withdraw, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
 		    }
 
-			withdrawCommand.execute();
+//			withdrawCommand.execute();
 		}
 		
 		
