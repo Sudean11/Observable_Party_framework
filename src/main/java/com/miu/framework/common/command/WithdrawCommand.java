@@ -1,7 +1,5 @@
 package com.miu.framework.common.command;
 
-import com.miu.framework.common.service.AccountService;
-
 public class WithdrawCommand implements Command {
     private AccountService accountService;
 

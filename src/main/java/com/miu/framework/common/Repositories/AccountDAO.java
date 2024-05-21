@@ -1,4 +1,4 @@
-package com.miu.framework.creditCard.Repositories;
+package com.miu.framework.common.Repositories;
 
 import com.miu.framework.common.entity.Account;
 
