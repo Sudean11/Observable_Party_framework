@@ -15,8 +15,4 @@ public class AddInterestCommand implements Command {
         accountService.deposit();
     }
 
-    @Override
-    public void undo() {
-        accountService.withdraw();
-    }
 }

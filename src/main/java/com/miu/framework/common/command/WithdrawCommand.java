@@ -15,8 +15,4 @@ public class WithdrawCommand implements Command {
         accountService.withdraw();
     }
 
-    @Override
-    public void undo() {
-        accountService.deposit();
-    }
 }

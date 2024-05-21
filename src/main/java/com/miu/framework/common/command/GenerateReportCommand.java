@@ -15,8 +15,4 @@ public class GenerateReportCommand implements Command{
         accountService.report();
     }
 
-    @Override
-    public void undo() {
-        System.out.println("No undo for report generation");
-    }
 }

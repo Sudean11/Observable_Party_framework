@@ -15,8 +15,4 @@ public class CreateAccountCommand implements Command{
         accountService.createAccount();
     }
 
-    @Override
-    public void undo() {
-        System.out.println("No account delete.");
-    }
 }
