@@ -5,6 +5,7 @@ import com.miu.framework.common.entity.Account;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public  abstract  class AccountDAO {
 	ArrayList<Account> accounts;
@@ -26,7 +27,7 @@ public  abstract  class AccountDAO {
 //		}
 		return null;
 	};
-	public Collection<Account> getAccounts(){
+	public List<Account> getAccounts(){
       return accounts;
 	};
 	abstract void saveAccount(Account account);

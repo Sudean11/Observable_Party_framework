@@ -7,4 +7,8 @@ public interface AccountService {
     void deposit();
     void withdraw();
     void report();
+
+    void addInterest();
+
+
 }
