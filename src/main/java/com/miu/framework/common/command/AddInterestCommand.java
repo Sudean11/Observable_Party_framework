@@ -12,11 +12,8 @@ public class AddInterestCommand implements Command {
     @Override
     public void execute() {
         System.out.println("Add Interest");
-//        accountService.deposit();
+        accountService.deposit();
     }
 
-    @Override
-    public void undo() {
-//        accountService/**/.withdraw();
-    }
+
 }
