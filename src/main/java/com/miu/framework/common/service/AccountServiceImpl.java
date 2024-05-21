@@ -1,13 +1,12 @@
 package com.miu.framework.common.service;
-
-
+import com.miu.framework.bank.entities.AccountTypeStrategy;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.observer.Observer;
 import com.miu.framework.common.Factory.DAOAndServiceImpl;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.Repositories.AccountDAO;
 import com.miu.framework.common.Factory.DAOAndServiceFactory;
-import com.miu.framework.creditCard.Factory.AccountDAOServiceImpl;
+import com.miu.framework.common.entity.Party;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,35 +15,26 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService, Observable {
 
 	List<Observer> observerList = new ArrayList<>();
-	private AccountDAO accountDAO;
-	private DAOAndServiceFactory factory;
+	private final AccountDAO accountDAO;
+
 	public AccountServiceImpl(DAOAndServiceFactory factory){
-		this.factory=factory;
 		accountDAO = factory.createAccountDAO();
-	}
-
-
-	public Account createAccount(String accountNumber, String name,double amount) {
-//		Account account = new CreditAccount(accountNumber, name, amount);
-//		accountDAO.save(account);
-//
-	return null;
-	}
-
-	@Override
-	public Account createAccount(String accountNumber, String name, double Amount, String email) {
-		return null;
 	}
 
 	public void deposit(String accountNumber, double amount) {
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.deposit(amount);
 		accountDAO.updateAccount(account);
+		notifyObservers(account,  amount);
+	}
+
+	@Override
+	public Account createAccount(Party party, AccountTypeStrategy accountTypeStrategy, String accountNumber) {
+		return new Account(accountNumber, party, accountTypeStrategy);
 	}
 
 	public Account getAccount(String accountNumber) {
-		Account account = accountDAO.loadAccount(accountNumber);
-		return account;
+        return accountDAO.loadAccount(accountNumber);
 	}
 
 	public Collection<Account> getAllAccounts() {
@@ -55,6 +45,7 @@ public class AccountServiceImpl implements AccountService, Observable {
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.withdraw(amount);
 		accountDAO.updateAccount(account);
+		notifyObservers(account, amount);
 	}
 
 	@Override
@@ -79,9 +70,9 @@ public class AccountServiceImpl implements AccountService, Observable {
 	}
 
 	@Override
-	public void notifyObservers(String email, String message) {
+	public void notifyObservers(Account account, double amount) {
 		for(Observer observer: observerList){
-			observer.update(email, message);
+			observer.update(account, amount);
 		}
 	}
 }

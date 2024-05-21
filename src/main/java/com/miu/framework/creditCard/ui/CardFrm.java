@@ -26,10 +26,10 @@ public class CardFrm extends javax.swing.JFrame
     CardFrm thisframe;
     private Object rowdata[];
 
-	private Command createAccountCommand = new CreateAccountCommand(new BankService());
-	private Command depositeCommand = new DepositeCommand(new BankService());
-	private Command generateReportCommand = new GenerateReportCommand(new BankService());
-	private Command withdrawCommand = new WithdrawCommand(new BankService());
+//	private Command createAccountCommand = new CreateAccountCommand(new BankService());
+//	private Command depositeCommand = new DepositeCommand(new BankService());
+//	private Command generateReportCommand = new GenerateReportCommand(new BankService());
+//	private Command withdrawCommand = new WithdrawCommand(new BankService());
     
 	public CardFrm()
 	{
@@ -217,7 +217,7 @@ public class CardFrm extends javax.swing.JFrame
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
         }
-		createAccountCommand.execute();
+//		createAccountCommand.execute();
        
         
     }
@@ -227,7 +227,7 @@ public class CardFrm extends javax.swing.JFrame
 		JDialogGenBill billFrm = new JDialogGenBill();
 		billFrm.setBounds(450, 20, 400, 350);
 		billFrm.show();
-	    generateReportCommand.execute();
+//	    generateReportCommand.execute();
 	}
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event)
@@ -249,7 +249,7 @@ public class CardFrm extends javax.swing.JFrame
 		    long newamount=currentamount+deposit;
 		    model.setValueAt(String.valueOf(newamount),selection, 4);
 		}
-		depositeCommand.execute();
+//		depositeCommand.execute();
 		
 	}
 
@@ -275,7 +275,7 @@ public class CardFrm extends javax.swing.JFrame
 		       JOptionPane.showMessageDialog(JButton_Withdraw, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
 		    }
 		}
-		withdrawCommand.execute();
+//		withdrawCommand.execute();
 		
 	}
 	

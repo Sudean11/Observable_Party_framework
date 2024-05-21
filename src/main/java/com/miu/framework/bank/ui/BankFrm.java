@@ -1,6 +1,8 @@
 package com.miu.framework.bank.ui;
 
+import com.miu.framework.common.Factory.DAOAndServiceImpl;
 import com.miu.framework.common.command.*;
+import com.miu.framework.common.service.AccountServiceImpl;
 
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
@@ -22,10 +24,10 @@ public class BankFrm extends javax.swing.JFrame
     BankFrm myframe;
     private Object rowdata[];
 
-	private Command addInterestCommand = new AddInterestCommand(new BankService());
-	private Command createAccountCommand = new CreateAccountCommand(new BankService());
-	private Command depositeCommand = new DepositeCommand(new BankService());
-	private Command withdrawCommand = new WithdrawCommand(new BankService());
+	private Command addInterestCommand = new AddInterestCommand(new AccountServiceImpl(new DAOAndServiceImpl()));
+	private Command createAccountCommand = new CreateAccountCommand(new AccountServiceImpl(new DAOAndServiceImpl()));
+	private Command depositeCommand = new DepositeCommand(new AccountServiceImpl(new DAOAndServiceImpl()));
+	private Command withdrawCommand = new WithdrawCommand();
     
 	public BankFrm()
 	{
@@ -39,11 +41,6 @@ public class BankFrm extends javax.swing.JFrame
 		JPanel1.setLayout(null);
 		getContentPane().add(BorderLayout.CENTER, JPanel1);
 		JPanel1.setBounds(0,0,575,310);
-		/*
-		/Add five buttons on the pane 
-		/for Adding personal account, Adding company account
-		/Deposit, Withdraw and Exit from the system
-		*/
         JScrollPane1 = new JScrollPane();
         model = new DefaultTableModel();
         JTable1 = new JTable(model);

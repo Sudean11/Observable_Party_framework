@@ -9,5 +9,4 @@ public class Company extends Party {
         super(id, companyName, email);
         this.companyName = companyName;
     }
-
 }

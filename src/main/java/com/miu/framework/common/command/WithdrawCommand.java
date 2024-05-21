@@ -1,20 +1,22 @@
 package com.miu.framework.common.command;
 
 public class WithdrawCommand implements Command {
-    private AccountService accountService;
+//    private AccountService accountService;
 
-    public WithdrawCommand(AccountService accountService) {
-        this.accountService = accountService;
-    }
+//    public WithdrawCommand(AccountService accountService) {
+//        this.accountService = accountService;
+//    }
+
+    public WithdrawCommand(){}
 
     @Override
     public void execute() {
         System.out.println("withdraw command");
-        accountService.withdraw();
+//        accountService.withdraw();
     }
 
     @Override
     public void undo() {
-        accountService.deposit();
+//        accountService.deposit();
     }
 }
