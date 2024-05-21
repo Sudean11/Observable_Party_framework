@@ -22,6 +22,12 @@ public abstract class Account {
     public abstract void deposit(double amount);
     public abstract void withdraw(double amount);
 
+    public abstract double calculateInterest(double amount);
+
+    public double getMinimumMonthlyPayment(double amount){
+        throw new NoSuchMethodError();
+    };
+
     public double getBalance() {
         return balance;
     }

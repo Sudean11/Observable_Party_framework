@@ -1,7 +1,8 @@
-package com.miu.framework.common.entity;
+package com.miu.framework.bank.entities;
 
-import com.miu.framework.bank.entities.Transaction;
-import com.miu.framework.bank.entities.TransactionType;
+import com.miu.framework.common.entity.Account;
+import com.miu.framework.common.entity.Party;
+import com.miu.framework.common.utils.Constants;
 
 public class CheckingAccount extends Account {
     public CheckingAccount(String accountNumber, Party owner) {
@@ -12,7 +13,6 @@ public class CheckingAccount extends Account {
     public void deposit(double amount) {
         balance += amount;
         addTransaction(new Transaction(amount, TransactionType.DEPOSIT));
-
     }
 
     @Override
@@ -20,5 +20,10 @@ public class CheckingAccount extends Account {
         balance -= amount;
         addTransaction(new Transaction(amount, TransactionType.DEPOSIT));
 
+    }
+
+    @Override
+    public double calculateInterest(double amount) {
+        return amount * Constants.CHECKINGS_ACCOUNT_INTEREST/100;
     }
 }
