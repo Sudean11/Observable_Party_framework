@@ -44,6 +44,10 @@ public class AccountServiceImpl implements AccountService, Observable {
 	public void withdraw(String accountNumber, double amount) {
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.withdraw(amount);
+		if(account.getBalance() < 0){
+			notifyObservers(account, amount);
+			return;
+		}
 		accountDAO.updateAccount(account);
 		notifyObservers(account, amount);
 	}

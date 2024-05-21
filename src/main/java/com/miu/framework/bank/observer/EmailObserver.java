@@ -26,9 +26,11 @@ public class EmailObserver implements  Observer{
     @Override
     public void update(Account account, double amount) {
         if(account.getOwner() instanceof Person){
-            System.out.println("EMAIL:" +account.getEmail()+" \n message: "+amount);
+            System.out.println("EMAIL:" +account.getEmail()+" \n Amount: "+amount);
         }else{
-            System.out.println("EMAIL:" +account.getEmail()+" \n message: "+amount);
+            if(amount > 500){
+                System.out.println("EMAIL:" +account.getEmail()+" \n Amount: "+amount);
+            }
         }
     }
 }
