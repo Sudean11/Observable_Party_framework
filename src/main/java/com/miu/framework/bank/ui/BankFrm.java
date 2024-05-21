@@ -1,5 +1,8 @@
 package com.miu.framework.bank.ui;
 
+import com.miu.framework.common.command.*;
+import com.miu.framework.common.service.BankService;
+
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
@@ -19,6 +22,11 @@ public class BankFrm extends javax.swing.JFrame
     private JScrollPane JScrollPane1;
     BankFrm myframe;
     private Object rowdata[];
+
+	private Command addInterestCommand = new AddInterestCommand(new BankService());
+	private Command createAccountCommand = new CreateAccountCommand(new BankService());
+	private Command depositeCommand = new DepositeCommand(new BankService());
+	private Command withdrawCommand = new WithdrawCommand(new BankService());
     
 	public BankFrm()
 	{
@@ -217,7 +225,7 @@ public class BankFrm extends javax.swing.JFrame
             newaccount=false;
         }
 
-       
+       createAccountCommand.execute();
         
     }
 
@@ -245,7 +253,7 @@ public class BankFrm extends javax.swing.JFrame
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
         }
-
+		createAccountCommand.execute();
 	}
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event)
@@ -266,6 +274,7 @@ public class BankFrm extends javax.swing.JFrame
             long currentamount = Long.parseLong(samount);
 		    long newamount=currentamount+deposit;
 		    model.setValueAt(String.valueOf(newamount),selection, 5);
+			depositeCommand.execute();
 		}
 		
 		
@@ -292,6 +301,8 @@ public class BankFrm extends javax.swing.JFrame
 		    if (newamount <0){
 		       JOptionPane.showMessageDialog(JButton_Withdraw, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
 		    }
+
+			withdrawCommand.execute();
 		}
 		
 		
@@ -300,6 +311,7 @@ public class BankFrm extends javax.swing.JFrame
 	void JButtonAddinterest_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		  JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
+		  addInterestCommand.execute();
 	    
 	}
 }
