@@ -3,13 +3,19 @@ package com.miu.framework.bank.ui;
 import com.miu.framework.bank.commands.AddInterestCommand;
 import com.miu.framework.bank.entities.Transaction;
 import com.miu.framework.common.Factory.DAOFactoryImpl;
+import com.miu.framework.common.Factory.DAOFactoryImpl;
 import com.miu.framework.common.command.Command;
 import com.miu.framework.common.command.TransactionHistoryCommand;
+import com.miu.framework.common.command.GetAllAccountsCommand;
+import com.miu.framework.common.entity.Account;
+import com.miu.framework.common.receiver.AccountsResultReceiver;
+import com.miu.framework.common.receiver.ResultReceiver;
 import com.miu.framework.common.service.AccountService;
 import com.miu.framework.common.service.AccountServiceImpl;
 import com.miu.framework.common.utils.enums.BankAccountType;
 
 import java.awt.*;
+import java.util.Collection;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 
@@ -31,6 +37,9 @@ public class BankFrm extends javax.swing.JFrame
 	private Object rowdata[];
 	//TODO make this dynamic, it is not thread safe here
 	AccountService bankService = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createAccountDAO(), DAOFactoryImpl.getDAOService().createPartyDAO());
+	private ResultReceiver<Collection<Account>> accountsReceiver = new AccountsResultReceiver();
+
+	Command getAllAccountsCommand = new GetAllAccountsCommand(bankService, accountsReceiver);
 	public BankFrm()
 	{
 		myframe = this;
@@ -223,14 +232,8 @@ public class BankFrm extends javax.swing.JFrame
 		pac.show();
 
 		if (newaccount){
-			// add row to table
-			rowdata[0] = accountnr;
-			rowdata[1] = clientName;
-			rowdata[2] = city;
-			rowdata[3] = "P";
-			rowdata[4] = accountType;
-			rowdata[5] = "0";
-			model.addRow(rowdata);
+            // add row to table
+			getAllCount_actionPerformed();
 
 			JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
 			newaccount=false;
@@ -262,14 +265,7 @@ public class BankFrm extends javax.swing.JFrame
 		pac.show();
 
 		if (newaccount){
-			// add row to table
-			rowdata[0] = accountnr;
-			rowdata[1] = clientName;
-			rowdata[2] = city;
-			rowdata[3] = "C";
-			rowdata[4] = accountType;
-			rowdata[5] = "0";
-			model.addRow(rowdata);
+			getAllCount_actionPerformed();
 
 			JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
 			newaccount=false;
@@ -279,22 +275,22 @@ public class BankFrm extends javax.swing.JFrame
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event)
 	{
-		// get selected name
-		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-		if (selection >=0){
-			String accnr = (String)model.getValueAt(selection, 0);
-
-			//Show the dialog for adding deposit amount for the current mane
-			JDialog_Deposit dep = new JDialog_Deposit(myframe,accnr);
-			dep.setBounds(430, 15, 275, 140);
-			dep.show();
-
-			// compute new amount
-			long deposit = Long.parseLong(amountDeposit);
-			String samount = (String)model.getValueAt(selection, 5);
-			long currentamount = Long.parseLong(samount);
-			long newamount=currentamount+deposit;
-			model.setValueAt(String.valueOf(newamount),selection, 5);
+	    // get selected name
+        int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+        if (selection >=0){
+            String accnr = (String)model.getValueAt(selection, 0);
+    	    
+		    //Show the dialog for adding deposit amount for the current mane
+		    JDialog_Deposit dep = new JDialog_Deposit(myframe,accnr);
+		    dep.setBounds(430, 15, 275, 140);
+		    dep.show();
+			getAllCount_actionPerformed();
+		    // compute new amount
+//            long deposit = Long.parseLong(amountDeposit);
+//            String samount = (String)model.getValueAt(selection, 5);
+//            long currentamount = Long.parseLong(samount);
+//		    long newamount=currentamount+deposit;
+//		    model.setValueAt(String.valueOf(newamount),selection, 5);
 //			depositeCommand.execute();
 		}
 
@@ -308,22 +304,20 @@ public class BankFrm extends javax.swing.JFrame
 		if (selection >=0){
 			String accnr = (String)model.getValueAt(selection, 0);
 
-			//Show the dialog for adding withdraw amount for the current mane
-			JDialog_Withdraw wd = new JDialog_Withdraw(myframe,accnr);
-			wd.setBounds(430, 15, 275, 140);
-			wd.show();
-
-			// compute new amount
-			long deposit = Long.parseLong(amountDeposit);
 			String samount = (String)model.getValueAt(selection, 5);
-			long currentamount = Long.parseLong(samount);
-			long newamount=currentamount-deposit;
-			model.setValueAt(String.valueOf(newamount),selection, 5);
-			if (newamount <0){
-				JOptionPane.showMessageDialog(JButton_Withdraw, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
-			}
+			double currentamount = Double.parseDouble(samount);
 
-//			withdrawCommand.execute();
+		    //Show the dialog for adding withdraw amount for the current mane
+		    JDialog_Withdraw wd = new JDialog_Withdraw(myframe,accnr, currentamount);
+		    wd.setBounds(430, 15, 275, 140);
+		    wd.show();
+			getAllCount_actionPerformed();
+
+		    // compute new amount
+//            double deposit = Double.parseDouble(amountDeposit);
+
+//		    double newamount=currentamount-deposit;
+//		    model.setValueAt(String.valueOf(newamount),selection, 5);
 		}
 
 
@@ -331,8 +325,26 @@ public class BankFrm extends javax.swing.JFrame
 
 	void JButtonAddinterest_actionPerformed(java.awt.event.ActionEvent event)
 	{
-		JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
-		Command addInterestCommand = new AddInterestCommand(bankService);
-		addInterestCommand.execute();
+		  JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
+		  Command addInterestCommand = new AddInterestCommand(bankService);
+		  addInterestCommand.execute();
+		getAllCount_actionPerformed();
+	}
+
+	void getAllCount_actionPerformed(){
+		getAllAccountsCommand.execute();
+		Collection<Account> accounts = accountsReceiver.getResult();
+		model.setRowCount(0);
+		System.out.println("LOADING DATA...");
+		for(Account account: accounts){
+			rowdata[0] = account.getAccountNumber();
+			rowdata[1] = account.getOwner().getName();
+			rowdata[2] = account.getOwner().getCity();
+			rowdata[3] = account.getOwner().getAccountOwnerType();
+			rowdata[4] = account.getOwner().getAccountType();
+			rowdata[5] = Double.toString(account.getBalance());
+			model.addRow(rowdata);
+		}
+
 	}
 }
