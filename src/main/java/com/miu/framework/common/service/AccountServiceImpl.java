@@ -22,6 +22,8 @@ public class AccountServiceImpl implements AccountService, Observable {
 	}
 
 	public void deposit(String accountNumber, double amount) {
+		System.out.println("Amount :: "+amount);
+
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.deposit(amount);
 		accountDAO.updateAccount(account);
