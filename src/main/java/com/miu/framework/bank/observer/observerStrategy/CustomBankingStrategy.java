@@ -8,7 +8,6 @@ public class CustomBankingStrategy implements ObserverStrategy{
 
     @Override
     public void notifyUser(Account account, double amount, TransactionType transactionType) {
-        System.out.println("hello");
         if(account.getOwner() instanceof Company){
             System.out.println("********************************");
             System.out.println("EMAIL sent to Ac.No: "+ account.getAccountNumber()+ "\nAmount: "+amount);

@@ -9,8 +9,5 @@ public class StrategyCheckingAccount implements StrategyAccountType {
         return amount * InterestConstants.CHECKINGS_ACCOUNT_INTEREST/100;
     }
 
-    @Override
-    public void notifyUsers() {
 
-    }
 }

@@ -23,8 +23,5 @@ public class StrategyGold implements StrategyCreditCard {
         return amount* InterestConstants.GOLD_MONTHLY_PAYMENT/100;
     }
 
-    @Override
-    public void notifyUsers() {
 
-    }
 }

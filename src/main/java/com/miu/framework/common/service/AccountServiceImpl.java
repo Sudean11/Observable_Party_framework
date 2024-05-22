@@ -94,7 +94,7 @@ public class AccountServiceImpl implements AccountService, Observable {
 	public void addInterest() {
 		List<Account> accounts = accountDAO.getAccounts();
 		for(Account account: accounts){
-			deposit(account.getAccountNumber(),account.calculateInterest(account.getBalance()));
+			account.deposit(account.calculateInterest(account.getBalance()));
 		}
 	}
 
