@@ -1,8 +1,8 @@
 package com.miu.framework.bank.ui;
 
-import com.miu.framework.common.Factory.DAOAndServiceImpl;
-import com.miu.framework.bank.constants.BankAccountType;
-import com.miu.framework.common.command.AddInterestCommand;
+import com.miu.framework.bank.commands.AddInterestCommand;
+import com.miu.framework.common.Factory.DAOFactoryImpl;
+import com.miu.framework.common.Factory.ServiceFactoryImpl;
 import com.miu.framework.common.command.Command;
 import com.miu.framework.common.command.GetAllAccountsCommand;
 import com.miu.framework.common.entity.Account;
@@ -10,6 +10,7 @@ import com.miu.framework.common.receiver.AccountsResultReceiver;
 import com.miu.framework.common.receiver.ResultReceiver;
 import com.miu.framework.common.service.AccountService;
 import com.miu.framework.common.service.AccountServiceImpl;
+import com.miu.framework.common.utils.enums.BankAccountType;
 
 import java.awt.*;
 import java.util.Collection;
@@ -33,7 +34,7 @@ public class BankFrm extends javax.swing.JFrame
     BankFrm myframe;
     private Object rowdata[];
 	//TODO make this dynamic, it is not thread safe here
-	AccountService bankService = new AccountServiceImpl(DAOAndServiceImpl.getDAOService().createAccountDAO(), DAOAndServiceImpl.getDAOService().createPartyDAO());
+	AccountService bankService = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createAccountDAO(), DAOFactoryImpl.getDAOService().createPartyDAO());
 	private ResultReceiver<Collection<Account>> accountsReceiver = new AccountsResultReceiver();
 
 	Command getAllAccountsCommand = new GetAllAccountsCommand(bankService, accountsReceiver);

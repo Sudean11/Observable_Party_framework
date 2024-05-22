@@ -3,12 +3,11 @@ package com.miu.framework.creditCard.ui;
 		A basic implementation of the JDialog class.
 */
 
-import com.miu.framework.common.command.CreateCreditCardAccountCommand;
+import com.miu.framework.creditCard.commands.CreateCreditCardAccountCommand;
 import com.miu.framework.creditCard.entities.Person;
 import com.miu.framework.common.command.Command;
-import com.miu.framework.common.command.CreatePersonalAccountCommand;
 import com.miu.framework.common.service.AccountService;
-import com.miu.framework.creditCard.constants.AccountType;
+import com.miu.framework.common.utils.enums.AccountType;
 
 public class JDialog_AddCCAccount extends javax.swing.JDialog
 {

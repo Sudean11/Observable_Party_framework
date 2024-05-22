@@ -1,4 +1,4 @@
-package com.miu.framework.bank.entities;
+package com.miu.framework.common.utils.enums;
 
 public enum TransactionType {
     DEPOSIT,

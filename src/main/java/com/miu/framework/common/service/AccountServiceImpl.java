@@ -1,17 +1,17 @@
 package com.miu.framework.common.service;
-import com.miu.framework.bank.entities.StrategyAccountType;
+import com.miu.framework.bank.entities.Transaction;
+import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.observer.Observer;
-import com.miu.framework.common.Factory.DAOAndServiceImpl;
+import com.miu.framework.common.Factory.DAOFactoryImpl;
 import com.miu.framework.common.Repositories.PartyDAO;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.Repositories.AccountDAO;
-import com.miu.framework.common.Factory.DAOAndServiceFactory;
+import com.miu.framework.common.Factory.DAOFactory;
 import com.miu.framework.common.entity.Party;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements AccountService, Observable {
 
@@ -69,12 +69,31 @@ public class AccountServiceImpl implements AccountService, Observable {
 
 	@Override
 	public void addInterest() {
-		DAOAndServiceFactory accountDao = new DAOAndServiceImpl();
+		DAOFactory accountDao = new DAOFactoryImpl();
 		AccountDAO accountDAO = accountDao.createAccountDAO();
 		List<Account> accounts = accountDAO.getAccounts();
 		for(Account account: accounts){
 			account.deposit(account.calculateInterest(account.getBalance()));
 		}
+	}
+
+	@Override
+	public String generateReport() {
+		StringBuilder report = new StringBuilder();
+		Map<Party,List<Account>> accounts = accountDAO.getAccounts().stream()
+				.collect(Collectors.groupingBy(Account::getOwner));
+		accounts.forEach((k,v)->{
+			report.append("Owner : "+k.getEmail()+"\n");
+			v.forEach(f->{
+				report.append("\t\t"+f.generateReport()+"\n");
+			});
+		});
+		return report.toString();
+	}
+
+	@Override
+	public String getTransaction(String accountNumber) {
+		return accountDAO.loadAccount(accountNumber).getTransactionHistory().stream().map(Transaction::toString).collect(Collectors.toList()).toString();
 	}
 
 	@Override

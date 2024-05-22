@@ -1,21 +1,19 @@
 package com.miu.framework.common.Factory;
 
-import com.miu.framework.bank.observer.EmailObserver;
 import com.miu.framework.common.Repositories.*;
-import com.miu.framework.common.service.AccountService;
 
 import java.util.Objects;
 
-public class DAOAndServiceImpl implements DAOAndServiceFactory{
+public class DAOFactoryImpl implements DAOFactory {
 
 
-    private volatile static DAOAndServiceImpl instance;
+    private volatile static DAOFactoryImpl instance;
 
-    public static DAOAndServiceImpl getDAOService(){
+    public static DAOFactoryImpl getDAOService(){
         if(Objects.isNull(instance)){
-            synchronized (DAOAndServiceImpl.class){
+            synchronized (DAOFactoryImpl.class){
                 if(Objects.isNull(instance)){
-                    instance = new DAOAndServiceImpl();
+                    instance = new DAOFactoryImpl();
                 }
             }
         }
@@ -28,10 +26,6 @@ public class DAOAndServiceImpl implements DAOAndServiceFactory{
     }
 
 
-    @Override
-    public AccountService createAccountService() {
-        return null;
-    }
 
     @Override
     public PartyDAO createPartyDAO() {

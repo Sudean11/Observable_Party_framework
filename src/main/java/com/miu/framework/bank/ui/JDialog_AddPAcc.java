@@ -5,8 +5,8 @@ package com.miu.framework.bank.ui;
 
 import com.miu.framework.bank.entities.Person;
 import com.miu.framework.common.command.Command;
-import com.miu.framework.common.command.CreatePersonalAccountCommand;
-import com.miu.framework.bank.constants.BankAccountType;
+import com.miu.framework.bank.commands.CreatePersonalAccountCommand;
+import com.miu.framework.common.utils.enums.BankAccountType;
 import com.miu.framework.common.service.AccountService;
 
 public class JDialog_AddPAcc extends javax.swing.JDialog
