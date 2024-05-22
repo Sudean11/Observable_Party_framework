@@ -12,17 +12,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public abstract class CreditAccount extends Account {
-
-    public CreditAccount(String accountNumber, Party owner) {
-        super(accountNumber, owner);
+    CreditCardStrategy cardStrategy;
+    public CreditAccount(String accountNumber, Party owner,CreditCardStrategy cardStrategy) {
+        super(accountNumber, owner,cardStrategy);
+        this.cardStrategy=cardStrategy;
     }
 
     @Override
     public void deposit(double amount) {
 
     }
-    public abstract double getMonthlyInterest();
-    public abstract double getMinimumPayment();
     @Override
     public void withdraw(double amount) {
 
@@ -49,8 +48,9 @@ public abstract class CreditAccount extends Account {
                 .mapToDouble(m->m.getAmount())
                 .reduce(0,(x,y)->x+y);
         double previousBalance=getBalance();
-        double newBalance=previousBalance-totalCredit+totalCharges+getMonthlyInterest()*(previousBalance-totalCredit);
-        double totalDue=getMinimumPayment()*newBalance;
+        double newBalance=previousBalance-totalCredit+totalCharges
+                          + cardStrategy.getMonthlyInterest()*(previousBalance-totalCredit);
+        double totalDue=cardStrategy.getMinimumPayment()*newBalance;
         return "Account number :  "+accountNumber+"\t"+"\n"+"\t"+" - previous balance: "+balance+"\n" +
                 "        - total charges: "+totalCharges+"\n" +
                 "        - total credits: "+totalCredit+"\n" +

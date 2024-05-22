@@ -1,6 +1,5 @@
 package com.miu.framework.creditCard.entities;
 
-import com.miu.framework.common.entity.Party;
 import com.miu.framework.common.utils.Constants;
 
 public class Bronze implements CreditCardStrategy{

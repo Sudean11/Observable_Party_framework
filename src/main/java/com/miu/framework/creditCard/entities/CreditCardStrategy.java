@@ -7,5 +7,9 @@ import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.entity.Party;
 
 public interface CreditCardStrategy extends AccountTypeStrategy {
+    double getMonthlyInterest();
+
+    double getMinimumPayment();
+
     public double getMinimumMonthlyPayment(double amount);
 }
