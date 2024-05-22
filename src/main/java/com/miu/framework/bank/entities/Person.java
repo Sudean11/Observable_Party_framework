@@ -33,4 +33,31 @@ public class Person extends Party {
         this.bankAccountType = bankAccountType;
     }
 
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public BankAccountType getBankAccountType() {
+        return bankAccountType;
+    }
 }

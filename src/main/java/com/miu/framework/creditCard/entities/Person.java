@@ -10,7 +10,7 @@ public class Person extends Party {
     private String state;
     private String zip;
     private String expDate;
-    private AccountType bankAccountType;
+    private AccountType creditAccountType;
 
     public Person(String accountNumber,
                   String clientName,
@@ -20,7 +20,7 @@ public class Person extends Party {
                   String zip,
                   String expDate,
                   String email,
-                  AccountType bankAccountType) {
+                  AccountType creditAccountType) {
         super(clientName, email, accountNumber);
         this.accountNumber = accountNumber;
         this.name = clientName;
@@ -30,6 +30,36 @@ public class Person extends Party {
         this.zip = zip;
         this.expDate = expDate;
         this.email = email;
-        this.bankAccountType = bankAccountType;
+        this.creditAccountType = creditAccountType;
     }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public String getExpDate() {
+        return expDate;
+    }
+
+    public AccountType getCreditAccountType() {
+        return creditAccountType;
+    }
+
+
 }
