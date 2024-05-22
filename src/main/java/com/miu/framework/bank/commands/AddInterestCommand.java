@@ -1,5 +1,6 @@
-package com.miu.framework.common.command;
+package com.miu.framework.bank.commands;
 
+import com.miu.framework.common.command.Command;
 import com.miu.framework.common.service.AccountService;
 
 public class AddInterestCommand implements Command {

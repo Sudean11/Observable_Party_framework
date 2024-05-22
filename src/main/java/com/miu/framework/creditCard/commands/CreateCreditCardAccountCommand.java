@@ -1,10 +1,15 @@
-package com.miu.framework.common.command;
+package com.miu.framework.creditCard.commands;
 
-import com.miu.framework.creditCard.constants.AccountType;
+import com.miu.framework.common.command.Command;
+import com.miu.framework.common.utils.enums.AccountType;
 import com.miu.framework.creditCard.entities.*;
 import com.miu.framework.common.service.AccountService;
+import com.miu.framework.creditCard.strategy.StrategyBronze;
+import com.miu.framework.creditCard.strategy.StrategyCreditCard;
+import com.miu.framework.creditCard.strategy.StrategyGold;
+import com.miu.framework.creditCard.strategy.StrategySilver;
 
-public class CreateCreditCardAccountCommand implements Command{
+public class CreateCreditCardAccountCommand implements Command {
 
     AccountService creditCardService;
     Person person;

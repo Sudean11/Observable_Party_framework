@@ -1,6 +1,6 @@
-package com.miu.framework.common.utils;
+package com.miu.framework.common.utils.constants;
 
-public class Constants {
+public class InterestConstants {
     public static final double CHECKINGS_ACCOUNT_INTEREST = 5;
     public static final double SAVINGS_ACCOUNT_INTEREST = 10;
 

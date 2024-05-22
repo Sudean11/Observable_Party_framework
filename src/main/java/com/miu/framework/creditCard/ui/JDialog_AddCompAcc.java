@@ -1,7 +1,7 @@
 package com.miu.framework.creditCard.ui;
 
 
-import com.miu.framework.creditCard.constants.AccountType;
+import com.miu.framework.common.utils.enums.AccountType;
 
 public class JDialog_AddCompAcc extends javax.swing.JDialog
 {
