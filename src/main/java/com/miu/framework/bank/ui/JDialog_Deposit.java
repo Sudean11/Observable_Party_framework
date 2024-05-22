@@ -1,5 +1,9 @@
 package com.miu.framework.bank.ui;
 
+import com.miu.framework.common.command.Command;
+import com.miu.framework.common.command.DepositeCommand;
+import com.miu.framework.common.service.AccountService;
+
 public class JDialog_Deposit extends javax.swing.JDialog
 {
     
@@ -81,6 +85,8 @@ public class JDialog_Deposit extends javax.swing.JDialog
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
         parentframe.amountDeposit=JTextField_Deposit.getText();
+		Command depositeCommand = new DepositeCommand(parentframe.bankService, accnr, Double.parseDouble(parentframe.amountDeposit));
+		depositeCommand.execute();
         dispose();
 	}
 

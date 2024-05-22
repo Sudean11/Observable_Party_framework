@@ -1,19 +1,17 @@
 package com.miu.framework.creditCard.entities;
 
-import com.miu.framework.common.entity.Party;
 import com.miu.framework.common.utils.Constants;
 
-public class Gold implements CreditCardStrategy{
+public class StrategySilver implements StrategyCreditCard {
 
     @Override
     public double calculateInterest(double amount) {
-        return amount* Constants.GOLD_ACCOUNT_INTEREST/100;
+        return amount* Constants.SILVER_ACCOUNT_INTEREST/100;
     }
     @Override
     public double getMinimumMonthlyPayment(double amount){
-        return amount*Constants.GOLD_MONTHLY_PAYMENT/100;
+        return amount*Constants.SILVER_MONTHLY_PAYMENT/100;
     }
-
     @Override
     public void notifyUsers() {
 

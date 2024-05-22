@@ -1,6 +1,9 @@
 package com.miu.framework.bank.ui;
 
 
+import com.miu.framework.common.command.Command;
+import com.miu.framework.common.command.WithdrawCommand;
+
 public class JDialog_Withdraw extends javax.swing.JDialog
 {
    
@@ -82,6 +85,8 @@ public class JDialog_Withdraw extends javax.swing.JDialog
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
         parentframe.amountDeposit=JTextField_AMT.getText();
+		Command widthdrawCommand = new WithdrawCommand(parentframe.bankService,accnr, Double.parseDouble(parentframe.amountDeposit));
+		widthdrawCommand.execute();
 		dispose();
 	}
 
