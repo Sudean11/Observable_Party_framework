@@ -16,29 +16,25 @@ import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements AccountService, Observable {
 
-	private volatile static AccountServiceImpl instanceForBank;
-	private volatile static AccountServiceImpl instanceForCreditCard;
+	private volatile static AccountServiceImpl instance;
 
 	public static AccountServiceImpl getAccountServiceForBankImpl(){
-		if(Objects.isNull(instanceForBank)){
+		if(Objects.isNull(instance)){
 			synchronized (AccountServiceImpl.class){
-				if(Objects.isNull(instanceForBank)){
-					instanceForBank = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO(), DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
+				if(Objects.isNull(instance)){
+					instance = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO(), DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
 				}
 			}
 		}
-		return instanceForBank;
+		return instance;
 	}
 
-	public static AccountServiceImpl getAccountServiceForCreditCardImpl(){
-		if(Objects.isNull(instanceForCreditCard)){
-			synchronized (AccountServiceImpl.class){
-				if(Objects.isNull(instanceForCreditCard)){
-					instanceForCreditCard = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO(), DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
-				}
-			}
-		}
-		return instanceForCreditCard;
+	public void setAccountDAO(AccountDAO accountDAO) {
+		this.accountDAO = accountDAO;
+	}
+
+	public void setPartyDAO(PartyDAO partyDAO) {
+		this.partyDAO = partyDAO;
 	}
 
 	List<Observer> observerList = new ArrayList<>();

@@ -4,6 +4,8 @@ package com.miu.framework.creditCard.ui;
 */
 
 import com.miu.framework.common.Factory.DAOFactoryImpl;
+import com.miu.framework.common.Factory.ServiceFactory;
+import com.miu.framework.common.Factory.ServiceFactoryImpl;
 import com.miu.framework.common.service.AccountService;
 import com.miu.framework.common.service.AccountServiceImpl;
 
@@ -37,7 +39,7 @@ public class JDialogGenBill extends javax.swing.JDialog
 
 
 		billstring = "Ayoub";
-		AccountService creditService = AccountServiceImpl.getAccountServiceForCreditCardImpl();
+		AccountService creditService = ServiceFactoryImpl.getAccountServiceForBankImpl().getAccountServiceReferencedCreditCard();
 		JTextField1.setText(creditService.generateReport());
 		//}}
 	

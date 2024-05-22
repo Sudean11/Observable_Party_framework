@@ -2,7 +2,7 @@ package com.miu.framework.bank.ui;
 
 import com.miu.framework.bank.observer.EmailObserver;
 import com.miu.framework.bank.observer.Observable;
-import com.miu.framework.common.Factory.DAOFactoryImpl;
+import com.miu.framework.common.Factory.*;
 import com.miu.framework.common.utils.enums.BankAccountType;
 import com.miu.framework.bank.commands.AddInterestCommand;
 import com.miu.framework.bank.entities.Transaction;
@@ -40,7 +40,8 @@ public class BankFrm extends javax.swing.JFrame
 	BankFrm myframe;
 	private Object rowdata[];
 	//TODO make this dynamic, it is not thread safe here
-	AccountService bankService;
+	AccountService bankService = ServiceFactoryImpl.getAccountServiceForBankImpl().getAccountServiceReferencedBank();
+	//TODO Take this to constructor
 	private ResultReceiver<Collection<Account>> accountsReceiver = new AccountsResultReceiver();
 
 	Command getAllAccountsCommand = new GetAllAccountsCommand(bankService, accountsReceiver);
@@ -122,7 +123,6 @@ public class BankFrm extends javax.swing.JFrame
 	}
 
 private void setupConfiguration() {
-		bankService = AccountServiceImpl.getAccountServiceForBankImpl();
 		Observable observable = (Observable) bankService;
 		observable.registerObserver(EmailObserver.getEmailObserver());
 	}
