@@ -1,9 +1,8 @@
 package com.miu.framework.creditCard.entities;
 
-import com.miu.framework.common.entity.Party;
 import com.miu.framework.common.utils.Constants;
 
-public class Gold implements CreditCardStrategy{
+public class StrategyGold implements StrategyCreditCard {
 
     @Override
     public double getMonthlyInterest() {

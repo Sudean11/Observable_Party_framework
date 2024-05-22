@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public abstract class CreditAccount extends Account {
-    CreditCardStrategy cardStrategy;
-    public CreditAccount(String accountNumber, Party owner,CreditCardStrategy cardStrategy) {
+    StrategyCreditCard cardStrategy;
+    public CreditAccount(String accountNumber, Party owner,StrategyCreditCard cardStrategy) {
         super(accountNumber, owner,cardStrategy);
         this.cardStrategy=cardStrategy;
     }

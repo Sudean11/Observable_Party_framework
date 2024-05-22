@@ -2,6 +2,8 @@ package com.miu.framework.bank.ui;
 
 import com.miu.framework.common.Factory.DAOAndServiceImpl;
 import com.miu.framework.bank.constants.BankAccountType;
+import com.miu.framework.common.command.AddInterestCommand;
+import com.miu.framework.common.command.Command;
 import com.miu.framework.common.service.AccountService;
 import com.miu.framework.common.service.AccountServiceImpl;
 
@@ -25,9 +27,8 @@ public class BankFrm extends javax.swing.JFrame
     private JScrollPane JScrollPane1;
     BankFrm myframe;
     private Object rowdata[];
-
-	AccountService bankService = new AccountServiceImpl(new DAOAndServiceImpl());
-    
+	//TODO make this dynamic, it is not thread safe here
+	AccountService bankService = new AccountServiceImpl(DAOAndServiceImpl.getDAOService().createAccountDAO(), DAOAndServiceImpl.getDAOService().createPartyDAO());
 	public BankFrm()
 	{
 		myframe = this;
@@ -313,7 +314,7 @@ public class BankFrm extends javax.swing.JFrame
 	void JButtonAddinterest_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		  JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
-//		  addInterestCommand.execute();
-	    
+		  Command addInterestCommand = new AddInterestCommand(bankService);
+		  addInterestCommand.execute();
 	}
 }

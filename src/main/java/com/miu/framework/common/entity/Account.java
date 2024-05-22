@@ -17,6 +17,10 @@ public class Account {
     protected StrategyAccountType accountTypeStrategy;
     protected List<Transaction> transactionHistory = new ArrayList<>();
 
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
     public Party getOwner() {
         return owner;
     }
