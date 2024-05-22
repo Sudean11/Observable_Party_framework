@@ -25,6 +25,18 @@ public abstract class Party {
     public String getEmail() {
         return email;
     }
+
+    public String getCity(){
+        throw new UnsupportedOperationException();
+    }
+    public String getAccountType(){
+        throw new UnsupportedOperationException();
+    }
+
+    public String getAccountOwnerType(){
+        throw new UnsupportedOperationException();
+    }
+
 }
 
 

@@ -4,10 +4,15 @@ import com.miu.framework.common.Factory.DAOAndServiceImpl;
 import com.miu.framework.bank.constants.BankAccountType;
 import com.miu.framework.common.command.AddInterestCommand;
 import com.miu.framework.common.command.Command;
+import com.miu.framework.common.command.GetAllAccountsCommand;
+import com.miu.framework.common.entity.Account;
+import com.miu.framework.common.receiver.AccountsResultReceiver;
+import com.miu.framework.common.receiver.ResultReceiver;
 import com.miu.framework.common.service.AccountService;
 import com.miu.framework.common.service.AccountServiceImpl;
 
 import java.awt.*;
+import java.util.Collection;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 
@@ -29,6 +34,9 @@ public class BankFrm extends javax.swing.JFrame
     private Object rowdata[];
 	//TODO make this dynamic, it is not thread safe here
 	AccountService bankService = new AccountServiceImpl(DAOAndServiceImpl.getDAOService().createAccountDAO(), DAOAndServiceImpl.getDAOService().createPartyDAO());
+	private ResultReceiver<Collection<Account>> accountsReceiver = new AccountsResultReceiver();
+
+	Command getAllAccountsCommand = new GetAllAccountsCommand(bankService, accountsReceiver);
 	public BankFrm()
 	{
 		myframe = this;
@@ -316,5 +324,15 @@ public class BankFrm extends javax.swing.JFrame
 		  JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
 		  Command addInterestCommand = new AddInterestCommand(bankService);
 		  addInterestCommand.execute();
+	}
+
+	void getAllCount_actionPerformed(){
+		rowdata[0] = accountnr;
+		rowdata[1] = clientName;
+		rowdata[2] = city;
+		rowdata[3] = "C";
+		rowdata[4] = accountType;
+		rowdata[5] = "0";
+		model.addRow(rowdata);
 	}
 }
