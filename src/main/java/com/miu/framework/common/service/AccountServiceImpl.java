@@ -9,6 +9,7 @@ import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.Repositories.AccountDAO;
 import com.miu.framework.common.Factory.DAOFactory;
 import com.miu.framework.common.entity.Party;
+import com.miu.framework.common.utils.enums.TransactionType;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -54,13 +55,15 @@ public class AccountServiceImpl implements AccountService, Observable {
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.deposit(amount);
 		accountDAO.updateAccount(account);
-		notifyObservers(account, amount);
+		notifyObservers(account, amount, TransactionType.DEPOSIT);
 	}
 
 	@Override
 	public Account createAccount(Party party, StrategyAccountType accountTypeStrategy, String accountNumber) {
 		Account account =  new Account(accountNumber, party, accountTypeStrategy);
 		Party partyExists = partyDAO.loadParty(party.getEmail());
+
+		//Check if party already exists
 		if(partyExists != null){
 			party = partyDAO.loadParty(party.getEmail());
 		}else{
@@ -84,18 +87,18 @@ public class AccountServiceImpl implements AccountService, Observable {
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.withdraw(amount);
 		if(account.getBalance() < 0){
-			notifyObservers(account, amount);
+			notifyObservers(account, amount, TransactionType.WITHDRAWAL);
 			return;
 		}
 		accountDAO.updateAccount(account);
-		notifyObservers(account, amount);
+		notifyObservers(account, amount, TransactionType.WITHDRAWAL);
 	}
 
 	@Override
 	public void addInterest() {
 		List<Account> accounts = accountDAO.getAccounts();
 		for(Account account: accounts){
-			account.deposit(account.calculateInterest(account.getBalance()));
+			deposit(account.getAccountNumber(),account.calculateInterest(account.getBalance()));
 		}
 	}
 
@@ -130,9 +133,9 @@ public class AccountServiceImpl implements AccountService, Observable {
 	}
 
 	@Override
-	public void notifyObservers(Account account, double amount) {
+	public void notifyObservers(Account account, double amount, TransactionType transactionType) {
 		for(Observer observer: observerList){
-			observer.update(account, amount);
+			observer.update(account, amount, TransactionType.WITHDRAWAL);
 		}
 	}
 }

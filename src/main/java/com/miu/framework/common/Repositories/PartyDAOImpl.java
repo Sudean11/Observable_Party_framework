@@ -10,7 +10,6 @@ import java.util.Objects;
 public class PartyDAOImpl implements PartyDAO {
     List<Party> parties = new ArrayList<>();
     private volatile static PartyDAOImpl instance;
-
     public static PartyDAOImpl getPartyDAO(){
         if(Objects.isNull(instance)){
             synchronized (PartyDAOImpl.class){

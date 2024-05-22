@@ -1,5 +1,7 @@
 package com.miu.framework.common.entity;
 
+import com.miu.framework.bank.observer.observerStrategy.ObserverStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,8 @@ public abstract class Party {
         this.name = name;
         this.email = email;
     }
+
+
 
     public void addAccount(Account account) {
         accounts.add(account);

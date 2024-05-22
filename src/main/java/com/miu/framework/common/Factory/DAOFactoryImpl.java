@@ -6,10 +6,7 @@ import javax.servlet.http.Part;
 import java.util.Objects;
 
 public class DAOFactoryImpl implements DAOFactory {
-
-
     private volatile static DAOFactoryImpl instance;
-
     public static DAOFactoryImpl getDAOService(){
         if(Objects.isNull(instance)){
             synchronized (DAOFactoryImpl.class){
@@ -25,8 +22,6 @@ public class DAOFactoryImpl implements DAOFactory {
     public AccountDAO createAccountDAO() {
         return AccountDAOImpl.getAccountDAO();
     }
-
-
 
     @Override
     public PartyDAO createPartyDAO() {

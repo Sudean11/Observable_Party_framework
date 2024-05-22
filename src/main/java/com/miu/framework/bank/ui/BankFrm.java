@@ -1,5 +1,7 @@
 package com.miu.framework.bank.ui;
 
+import com.miu.framework.bank.observer.EmailObserver;
+import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.common.Factory.DAOFactoryImpl;
 import com.miu.framework.common.utils.enums.BankAccountType;
 import com.miu.framework.bank.commands.AddInterestCommand;
@@ -28,10 +30,11 @@ public class BankFrm extends javax.swing.JFrame
     BankFrm myframe;
     private Object rowdata[];
 	//TODO make this dynamic, it is not thread safe here
-	AccountService bankService = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createAccountDAO(), DAOFactoryImpl.getDAOService().createPartyDAO());
+	AccountService bankService;
 	public BankFrm()
 	{
 		myframe = this;
+		setupConfiguration();
 
 		setTitle("Bank Application.");
 		setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
@@ -102,7 +105,13 @@ public class BankFrm extends javax.swing.JFrame
 		
 	}
 
-	
+	private void setupConfiguration() {
+		bankService = AccountServiceImpl.getAccountServiceForBankImpl();
+		Observable observable = (Observable) bankService;
+		observable.registerObserver(EmailObserver.getEmailObserver());
+	}
+
+
 	/*****************************************************
 	 * The entry point for this application.
 	 * Sets the Look and Feel to the System Look and Feel.
