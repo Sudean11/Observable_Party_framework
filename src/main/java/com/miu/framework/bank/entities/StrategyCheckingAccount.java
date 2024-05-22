@@ -1,10 +1,8 @@
 package com.miu.framework.bank.entities;
 
-import com.miu.framework.common.entity.Account;
-import com.miu.framework.common.entity.Party;
 import com.miu.framework.common.utils.Constants;
 
-public class CheckingAccount implements AccountTypeStrategy {
+public class StrategyCheckingAccount implements StrategyAccountType {
     @Override
     public double calculateInterest(double amount) {
         return amount * Constants.CHECKINGS_ACCOUNT_INTEREST/100;

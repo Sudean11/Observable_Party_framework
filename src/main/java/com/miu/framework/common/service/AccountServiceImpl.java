@@ -1,5 +1,5 @@
 package com.miu.framework.common.service;
-import com.miu.framework.bank.entities.AccountTypeStrategy;
+import com.miu.framework.bank.entities.StrategyAccountType;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.observer.Observer;
 import com.miu.framework.common.Factory.DAOAndServiceImpl;
@@ -29,7 +29,8 @@ public class AccountServiceImpl implements AccountService, Observable {
 	}
 
 	@Override
-	public Account createAccount(Party party, AccountTypeStrategy accountTypeStrategy, String accountNumber) {
+	public Account createAccount(Party party, StrategyAccountType accountTypeStrategy, String accountNumber) {
+		System.out.println("Called");
 		return new Account(accountNumber, party, accountTypeStrategy);
 	}
 

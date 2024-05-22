@@ -1,10 +1,8 @@
 package com.miu.framework.bank.entities;
 
-import com.miu.framework.common.entity.Account;
-import com.miu.framework.common.entity.Party;
 import com.miu.framework.common.utils.Constants;
 
-public class SavingsAccount implements AccountTypeStrategy{
+public class StrategySavingsAccount implements StrategyAccountType {
     private static final double INTEREST_RATE = Constants.SAVINGS_ACCOUNT_INTEREST;
 
     @Override
