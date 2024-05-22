@@ -1,5 +1,6 @@
 package com.miu.framework.creditCard.commands;
 
+import com.miu.framework.bank.observer.observerStrategy.CustomCreditCardStrategy;
 import com.miu.framework.common.command.Command;
 import com.miu.framework.common.utils.enums.AccountType;
 import com.miu.framework.creditCard.entities.*;
@@ -30,7 +31,6 @@ public class CreateCreditCardAccountCommand implements Command {
         }else{
             strategyCreditCard = new StrategySilver();
         }
-
-        creditCardService.createAccount(person, strategyCreditCard, person.getAccountNumber());
+        creditCardService.createAccount(person, strategyCreditCard, person.getAccountNumber()).setObserverStrategy(new CustomCreditCardStrategy());
     }
 }

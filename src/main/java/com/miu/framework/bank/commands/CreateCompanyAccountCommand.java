@@ -1,5 +1,6 @@
 package com.miu.framework.bank.commands;
 
+import com.miu.framework.bank.observer.observerStrategy.CustomBankingStrategy;
 import com.miu.framework.common.command.Command;
 import com.miu.framework.common.utils.enums.BankAccountType;
 import com.miu.framework.bank.entities.Company;
@@ -26,7 +27,7 @@ public class CreateCompanyAccountCommand implements Command {
         }else{
             strategyAccountType = new StrategySavingsAccount();
         }
-        bankService.createAccount(company, strategyAccountType, company.getAccountNumber());
+        bankService.createAccount(company, strategyAccountType, company.getAccountNumber()).setObserverStrategy(new CustomBankingStrategy());
     }
 
 

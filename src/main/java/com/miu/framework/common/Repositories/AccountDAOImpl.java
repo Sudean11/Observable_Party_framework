@@ -1,5 +1,6 @@
 package com.miu.framework.common.Repositories;
 
+import com.miu.framework.bank.observer.EmailObserver;
 import com.miu.framework.common.entity.Account;
 
 import java.util.ArrayList;
@@ -8,6 +9,19 @@ import java.util.Objects;
 
 public class AccountDAOImpl implements AccountDAO {
 	List<Account> accounts;
+
+	private volatile static AccountDAO instance;
+
+	public static AccountDAO getAccountDAO(){
+		if(Objects.isNull(instance)){
+			synchronized (AccountDAO.class){
+				if(Objects.isNull(instance)){
+					instance = new AccountDAOImpl();
+				}
+			}
+		}
+		return instance;
+	}
 
 	public AccountDAOImpl(){
 		this.accounts=new ArrayList<>();

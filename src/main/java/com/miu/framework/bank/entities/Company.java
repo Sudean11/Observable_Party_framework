@@ -55,6 +55,7 @@ public class Company extends Party {
         this.numberOfEmployees = numberOfEmployees;
         this.email = email;
         this.bankAccountType = bankAccountType;
+
     }
 
     @Override
