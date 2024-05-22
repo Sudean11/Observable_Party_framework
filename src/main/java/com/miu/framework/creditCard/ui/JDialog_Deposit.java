@@ -84,7 +84,7 @@ public class JDialog_Deposit extends javax.swing.JDialog
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
         parentframe.amountDeposit=JTextField_Deposit.getText();
-		Command depositeCommand = new DepositeCommand(parentframe.creditService, name , Double.parseDouble(parentframe.amountDeposit));
+		Command depositeCommand = new DepositeCommand(parentframe.creditService, parentframe.ccnumber , Double.parseDouble(parentframe.amountDeposit));
 		depositeCommand.execute();
         dispose();
 	}
