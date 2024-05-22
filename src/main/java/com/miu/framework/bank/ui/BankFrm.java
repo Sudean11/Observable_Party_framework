@@ -285,22 +285,20 @@ public class BankFrm extends javax.swing.JFrame
         if (selection >=0){
             String accnr = (String)model.getValueAt(selection, 0);
 
+			String samount = (String)model.getValueAt(selection, 5);
+			double currentamount = Double.parseDouble(samount);
+
 		    //Show the dialog for adding withdraw amount for the current mane
-		    JDialog_Withdraw wd = new JDialog_Withdraw(myframe,accnr);
+		    JDialog_Withdraw wd = new JDialog_Withdraw(myframe,accnr, currentamount);
 		    wd.setBounds(430, 15, 275, 140);
 		    wd.show();
 			getAllCount_actionPerformed();
-		    // compute new amount
-//            long deposit = Long.parseLong(amountDeposit);
-//            String samount = (String)model.getValueAt(selection, 5);
-//            long currentamount = Long.parseLong(samount);
-//		    long newamount=currentamount-deposit;
-//		    model.setValueAt(String.valueOf(newamount),selection, 5);
-//		    if (newamount <0){
-//		       JOptionPane.showMessageDialog(JButton_Withdraw, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
-//		    }
 
-//			withdrawCommand.execute();
+		    // compute new amount
+//            double deposit = Double.parseDouble(amountDeposit);
+
+//		    double newamount=currentamount-deposit;
+//		    model.setValueAt(String.valueOf(newamount),selection, 5);
 		}
 		
 		

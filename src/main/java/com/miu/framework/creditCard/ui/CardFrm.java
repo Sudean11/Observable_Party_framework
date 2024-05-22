@@ -257,13 +257,16 @@ public class CardFrm extends javax.swing.JFrame
         if (selection >=0){
             String name = (String)model.getValueAt(selection, 0);
 
+			String samount = (String)model.getValueAt(selection, 4);
+			double currentamount = Double.parseDouble(samount);
+
 		    //Show the dialog for adding withdraw amount for the current mane
-		    JDialog_Withdraw wd = new JDialog_Withdraw(thisframe,name);
+		    JDialog_Withdraw wd = new JDialog_Withdraw(thisframe,name, currentamount);
 		    wd.setBounds(430, 15, 275, 140);
 		    wd.show();
-    		
-		    // compute new amount
 			getAllCount_actionPerformed();
+
+		    // compute new amount
 //			if (newamount <0){
 //		       JOptionPane.showMessageDialog(JButton_Withdraw, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
 //		    }
