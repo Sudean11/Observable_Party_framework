@@ -1,8 +1,8 @@
 package com.miu.framework.common.entity;
 
-import com.miu.framework.bank.entities.StrategyAccountType;
+import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.bank.entities.Transaction;
-import com.miu.framework.bank.entities.TransactionType;
+import com.miu.framework.common.utils.enums.TransactionType;
 
 import java.util.ArrayList;
 import java.util.List;

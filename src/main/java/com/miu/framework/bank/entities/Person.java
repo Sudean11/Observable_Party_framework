@@ -1,6 +1,6 @@
 package com.miu.framework.bank.entities;
 
-import com.miu.framework.bank.constants.BankAccountType;
+import com.miu.framework.common.utils.enums.BankAccountType;
 import com.miu.framework.common.entity.Party;
 
 public class Person extends Party {

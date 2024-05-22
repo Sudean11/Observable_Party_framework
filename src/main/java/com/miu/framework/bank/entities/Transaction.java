@@ -1,5 +1,7 @@
 package com.miu.framework.bank.entities;
 
+import com.miu.framework.common.utils.enums.TransactionType;
+
 import java.util.Date;
 
 public class Transaction {

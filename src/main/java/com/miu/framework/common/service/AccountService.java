@@ -1,6 +1,6 @@
 package com.miu.framework.common.service;
 
-import com.miu.framework.bank.entities.StrategyAccountType;
+import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.entity.Party;
 

@@ -1,14 +1,13 @@
 package com.miu.framework.creditCard.entities;
 
 import com.miu.framework.bank.entities.Transaction;
-import com.miu.framework.bank.entities.TransactionType;
+import com.miu.framework.common.utils.enums.TransactionType;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.entity.Party;
+import com.miu.framework.creditCard.strategy.StrategyCreditCard;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public abstract class CreditAccount extends Account {

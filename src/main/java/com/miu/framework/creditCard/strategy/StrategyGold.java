@@ -1,26 +1,26 @@
-package com.miu.framework.creditCard.entities;
+package com.miu.framework.creditCard.strategy;
 
-import com.miu.framework.common.utils.Constants;
+import com.miu.framework.common.utils.constants.InterestConstants;
 
 public class StrategyGold implements StrategyCreditCard {
 
     @Override
     public double getMonthlyInterest() {
-        return Constants.GOLD_ACCOUNT_INTEREST/100;
+        return InterestConstants.GOLD_ACCOUNT_INTEREST/100;
     }
 
     @Override
     public double getMinimumPayment() {
-        return Constants.GOLD_MONTHLY_PAYMENT/100;
+        return InterestConstants.GOLD_MONTHLY_PAYMENT/100;
     }
 
     @Override
     public double calculateInterest(double amount) {
-        return amount* Constants.GOLD_ACCOUNT_INTEREST/100;
+        return amount* InterestConstants.GOLD_ACCOUNT_INTEREST/100;
     }
     @Override
     public double getMinimumMonthlyPayment(double amount){
-        return amount*Constants.GOLD_MONTHLY_PAYMENT/100;
+        return amount* InterestConstants.GOLD_MONTHLY_PAYMENT/100;
     }
 
     @Override

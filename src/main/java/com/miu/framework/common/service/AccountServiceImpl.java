@@ -1,12 +1,12 @@
 package com.miu.framework.common.service;
-import com.miu.framework.bank.entities.StrategyAccountType;
+import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.observer.Observer;
-import com.miu.framework.common.Factory.DAOAndServiceImpl;
+import com.miu.framework.common.Factory.DAOFactoryImpl;
 import com.miu.framework.common.Repositories.PartyDAO;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.Repositories.AccountDAO;
-import com.miu.framework.common.Factory.DAOAndServiceFactory;
+import com.miu.framework.common.Factory.DAOFactory;
 import com.miu.framework.common.entity.Party;
 
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public class AccountServiceImpl implements AccountService, Observable {
 
 	@Override
 	public void addInterest() {
-		DAOAndServiceFactory accountDao = new DAOAndServiceImpl();
+		DAOFactory accountDao = new DAOFactoryImpl();
 		AccountDAO accountDAO = accountDao.createAccountDAO();
 		List<Account> accounts = accountDAO.getAccounts();
 		for(Account account: accounts){
