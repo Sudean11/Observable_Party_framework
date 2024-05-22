@@ -1,6 +1,9 @@
 package com.miu.framework.bank.ui;
 
-import com.miu.framework.common.command.*;
+import com.miu.framework.common.Factory.DAOAndServiceImpl;
+import com.miu.framework.bank.constants.BankAccountType;
+import com.miu.framework.common.service.AccountService;
+import com.miu.framework.common.service.AccountServiceImpl;
 
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,7 +17,8 @@ public class BankFrm extends javax.swing.JFrame
     /****
      * init variables in the object
      ****/
-    String accountnr, clientName,street,city,zip,state,accountType,clientType,amountDeposit;
+    String accountnr, clientName,street,city,zip,state,clientType,amountDeposit;
+	BankAccountType accountType;
     boolean newaccount;
     private DefaultTableModel model;
     private JTable JTable1;
@@ -22,10 +26,7 @@ public class BankFrm extends javax.swing.JFrame
     BankFrm myframe;
     private Object rowdata[];
 
-	private Command addInterestCommand = new AddInterestCommand(new BankService());
-	private Command createAccountCommand = new CreateAccountCommand(new BankService());
-	private Command depositeCommand = new DepositeCommand(new BankService());
-	private Command withdrawCommand = new WithdrawCommand(new BankService());
+	AccountService bankService = new AccountServiceImpl(new DAOAndServiceImpl());
     
 	public BankFrm()
 	{
@@ -207,7 +208,7 @@ public class BankFrm extends javax.swing.JFrame
 		 set the boundaries and show it 
 		*/
 		
-		JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe);
+		JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe, bankService);
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
 
@@ -220,11 +221,12 @@ public class BankFrm extends javax.swing.JFrame
             rowdata[4] = accountType;
             rowdata[5] = "0";
             model.addRow(rowdata);
-            JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
+
+			JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
         }
 
-       createAccountCommand.execute();
+//       createAccountCommand.execute();
         
     }
 
@@ -236,7 +238,7 @@ public class BankFrm extends javax.swing.JFrame
 		 show it 
 		*/
 		
-		JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
+		JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe, bankService);
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
 		
@@ -249,10 +251,11 @@ public class BankFrm extends javax.swing.JFrame
             rowdata[4] = accountType;
             rowdata[5] = "0";
             model.addRow(rowdata);
+
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
+
         }
-		createAccountCommand.execute();
 	}
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event)
@@ -273,7 +276,7 @@ public class BankFrm extends javax.swing.JFrame
             long currentamount = Long.parseLong(samount);
 		    long newamount=currentamount+deposit;
 		    model.setValueAt(String.valueOf(newamount),selection, 5);
-			depositeCommand.execute();
+//			depositeCommand.execute();
 		}
 		
 		
@@ -301,7 +304,7 @@ public class BankFrm extends javax.swing.JFrame
 		       JOptionPane.showMessageDialog(JButton_Withdraw, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
 		    }
 
-			withdrawCommand.execute();
+//			withdrawCommand.execute();
 		}
 		
 		
@@ -310,7 +313,7 @@ public class BankFrm extends javax.swing.JFrame
 	void JButtonAddinterest_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		  JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
-		  addInterestCommand.execute();
+//		  addInterestCommand.execute();
 	    
 	}
 }

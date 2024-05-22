@@ -1,7 +1,7 @@
-package com.miu.framework.bank.entities;
+package com.miu.framework.creditCard.entities;
 
-import com.miu.framework.bank.constants.BankAccountType;
 import com.miu.framework.common.entity.Party;
+import com.miu.framework.creditCard.constants.AccountType;
 
 public class Person extends Party {
     private String accountNumber;
@@ -10,9 +10,9 @@ public class Person extends Party {
     private String city;
     private String state;
     private String zip;
-    private String dob;
+    private String expDate;
     private String email;
-    private BankAccountType bankAccountType;
+    private AccountType bankAccountType;
 
     public Person(String accountNumber,
                   String clientName,
@@ -20,9 +20,9 @@ public class Person extends Party {
                   String city,
                   String state,
                   String zip,
-                  String dob,
+                  String expDate,
                   String email,
-                  BankAccountType bankAccountType) {
+                  AccountType bankAccountType) {
         super(clientName, email, accountNumber);
         this.accountNumber = accountNumber;
         this.clientName = clientName;
@@ -30,9 +30,8 @@ public class Person extends Party {
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.dob = dob;
+        this.expDate = expDate;
         this.email = email;
         this.bankAccountType = bankAccountType;
     }
-
 }
