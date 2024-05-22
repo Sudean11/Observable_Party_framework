@@ -1,6 +1,6 @@
 package com.miu.framework.common.entity;
 
-import com.miu.framework.bank.entities.AccountTypeStrategy;
+import com.miu.framework.bank.entities.StrategyAccountType;
 import com.miu.framework.bank.entities.Transaction;
 import com.miu.framework.bank.entities.TransactionType;
 
@@ -14,7 +14,7 @@ public class Account {
     protected double balance;
     protected Party owner;
 
-    protected AccountTypeStrategy accountTypeStrategy;
+    protected StrategyAccountType accountTypeStrategy;
     protected List<Transaction> transactionHistory = new ArrayList<>();
 
     public Party getOwner() {
@@ -25,7 +25,7 @@ public class Account {
         return owner.getEmail();
     }
 
-    public Account(String accountNumber, Party owner, AccountTypeStrategy accountTypeStrategy) {
+    public Account(String accountNumber, Party owner, StrategyAccountType accountTypeStrategy) {
         this.accountTypeStrategy = accountTypeStrategy;
         this.accountNumber = accountNumber;
         this.owner = owner;
