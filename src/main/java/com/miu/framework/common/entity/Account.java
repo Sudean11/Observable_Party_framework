@@ -4,6 +4,9 @@ import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.bank.entities.Transaction;
 import com.miu.framework.common.utils.enums.TransactionType;
 
+import javax.xml.crypto.Data;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +16,9 @@ public class Account {
     protected String accountNumber;
     protected double balance;
     protected Party owner;
+
+    protected double previousBalance;
+
 
     protected StrategyAccountType accountTypeStrategy;
     protected List<Transaction> transactionHistory = new ArrayList<>();
@@ -37,13 +43,13 @@ public class Account {
     }
 
     public void deposit(double amount){
+        addTransaction(new Transaction(amount, TransactionType.DEPOSIT, balance, LocalDate.now()));
         balance += amount;
-        addTransaction(new Transaction(amount, TransactionType.DEPOSIT));
     };
 
     public void withdraw(double amount){
+        addTransaction(new Transaction(amount, TransactionType.WITHDRAWAL, balance, LocalDate.now()));
         balance -= amount;
-        addTransaction(new Transaction(amount, TransactionType.WITHDRAWAL));
     };
 
     public double calculateInterest(double amount){
