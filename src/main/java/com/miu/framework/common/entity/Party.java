@@ -26,6 +26,10 @@ public abstract class Party {
         return email;
     }
 
+    public String getName(){
+        return name;
+    }
+
     public String getCity(){
         throw new UnsupportedOperationException();
     }
@@ -36,7 +40,6 @@ public abstract class Party {
     public String getAccountOwnerType(){
         throw new UnsupportedOperationException();
     }
-
 }
 
 

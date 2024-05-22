@@ -224,13 +224,7 @@ public class BankFrm extends javax.swing.JFrame
 
 		if (newaccount){
             // add row to table
-            rowdata[0] = accountnr;
-            rowdata[1] = clientName;
-            rowdata[2] = city;
-            rowdata[3] = "P";
-            rowdata[4] = accountType;
-            rowdata[5] = "0";
-            model.addRow(rowdata);
+			getAllCount_actionPerformed();
 
 			JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
@@ -253,14 +247,7 @@ public class BankFrm extends javax.swing.JFrame
 		pac.show();
 		
 		if (newaccount){
-            // add row to table
-            rowdata[0] = accountnr;
-            rowdata[1] = clientName;
-            rowdata[2] = city;
-            rowdata[3] = "C";
-            rowdata[4] = accountType;
-            rowdata[5] = "0";
-            model.addRow(rowdata);
+			getAllCount_actionPerformed();
 
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
@@ -279,13 +266,13 @@ public class BankFrm extends javax.swing.JFrame
 		    JDialog_Deposit dep = new JDialog_Deposit(myframe,accnr);
 		    dep.setBounds(430, 15, 275, 140);
 		    dep.show();
-    		
+			getAllCount_actionPerformed();
 		    // compute new amount
-            long deposit = Long.parseLong(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 5);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount+deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 5);
+//            long deposit = Long.parseLong(amountDeposit);
+//            String samount = (String)model.getValueAt(selection, 5);
+//            long currentamount = Long.parseLong(samount);
+//		    long newamount=currentamount+deposit;
+//		    model.setValueAt(String.valueOf(newamount),selection, 5);
 //			depositeCommand.execute();
 		}
 		
@@ -303,16 +290,16 @@ public class BankFrm extends javax.swing.JFrame
 		    JDialog_Withdraw wd = new JDialog_Withdraw(myframe,accnr);
 		    wd.setBounds(430, 15, 275, 140);
 		    wd.show();
-    		
+			getAllCount_actionPerformed();
 		    // compute new amount
-            long deposit = Long.parseLong(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 5);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount-deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 5);
-		    if (newamount <0){
-		       JOptionPane.showMessageDialog(JButton_Withdraw, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
-		    }
+//            long deposit = Long.parseLong(amountDeposit);
+//            String samount = (String)model.getValueAt(selection, 5);
+//            long currentamount = Long.parseLong(samount);
+//		    long newamount=currentamount-deposit;
+//		    model.setValueAt(String.valueOf(newamount),selection, 5);
+//		    if (newamount <0){
+//		       JOptionPane.showMessageDialog(JButton_Withdraw, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
+//		    }
 
 //			withdrawCommand.execute();
 		}
@@ -325,15 +312,23 @@ public class BankFrm extends javax.swing.JFrame
 		  JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
 		  Command addInterestCommand = new AddInterestCommand(bankService);
 		  addInterestCommand.execute();
+		getAllCount_actionPerformed();
 	}
 
 	void getAllCount_actionPerformed(){
-		rowdata[0] = accountnr;
-		rowdata[1] = clientName;
-		rowdata[2] = city;
-		rowdata[3] = "C";
-		rowdata[4] = accountType;
-		rowdata[5] = "0";
-		model.addRow(rowdata);
+		getAllAccountsCommand.execute();
+		Collection<Account> accounts = accountsReceiver.getResult();
+		model.setRowCount(0);
+		System.out.println("LOADING DATA...");
+		for(Account account: accounts){
+			rowdata[0] = account.getAccountNumber();
+			rowdata[1] = account.getOwner().getName();
+			rowdata[2] = account.getOwner().getCity();
+			rowdata[3] = account.getOwner().getAccountOwnerType();
+			rowdata[4] = account.getOwner().getAccountType();
+			rowdata[5] = Double.toString(account.getBalance());
+			model.addRow(rowdata);
+		}
+
 	}
 }
