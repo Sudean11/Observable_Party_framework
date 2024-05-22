@@ -9,6 +9,16 @@ public class Bronze extends CreditAccount{
     }
 
     @Override
+    public double getMonthlyInterest() {
+        return Constants.BRONZE_ACCOUNT_INTEREST/100;
+    }
+
+    @Override
+    public double getMinimumPayment() {
+        return Constants.BRONZE_MONTHLY_PAYMENT/100;
+    }
+
+    @Override
     public double calculateInterest(double amount) {
         return amount* Constants.BRONZE_ACCOUNT_INTEREST/100;
     }

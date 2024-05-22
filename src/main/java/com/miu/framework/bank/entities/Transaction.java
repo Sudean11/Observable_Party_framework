@@ -24,4 +24,10 @@ public class Transaction {
     public TransactionType getType() {
         return type;
     }
+    @Override
+    public String toString(){
+        return " Transaction Date  : "+date.toString()
+                +"\t"+"Transaction Type  :  " +type.toString()
+                +"\t"+"Amount  : "+amount;
+    }
 }

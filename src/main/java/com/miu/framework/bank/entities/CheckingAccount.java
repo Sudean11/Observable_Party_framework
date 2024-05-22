@@ -5,6 +5,7 @@ import com.miu.framework.common.entity.Party;
 import com.miu.framework.common.utils.Constants;
 
 public class CheckingAccount extends Account {
+
     public CheckingAccount(String accountNumber, Party owner) {
         super(accountNumber, owner);
     }
@@ -24,6 +25,7 @@ public class CheckingAccount extends Account {
 
     @Override
     public double calculateInterest(double amount) {
-        return amount * Constants.CHECKINGS_ACCOUNT_INTEREST/100;
+       return amount * Constants.CHECKINGS_ACCOUNT_INTEREST/100;
     }
+
 }

@@ -10,6 +10,16 @@ public class Silver extends CreditAccount{
     }
 
     @Override
+    public double getMonthlyInterest() {
+        return Constants.SILVER_ACCOUNT_INTEREST/100;
+    }
+
+    @Override
+    public double getMinimumPayment() {
+        return Constants.SILVER_MONTHLY_PAYMENT/100;
+    }
+
+    @Override
     public double calculateInterest(double amount) {
         return amount* Constants.SILVER_ACCOUNT_INTEREST/100;
     }

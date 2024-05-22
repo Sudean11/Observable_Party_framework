@@ -7,11 +7,13 @@ import com.miu.framework.common.Factory.DAOAndServiceImpl;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.Repositories.AccountDAO;
 import com.miu.framework.common.Factory.DAOAndServiceFactory;
-import com.miu.framework.creditCard.Factory.AccountDAOServiceImpl;
+import com.miu.framework.common.entity.Party;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements AccountService, Observable {
 
@@ -65,6 +67,20 @@ public class AccountServiceImpl implements AccountService, Observable {
 		for(Account account: accounts){
 			account.deposit(account.calculateInterest(account.getBalance()));
 		}
+	}
+
+	@Override
+	public String generateReport() {
+		StringBuilder report = new StringBuilder();
+		Map<Party,List<Account>> accounts = accountDAO.getAccounts().stream()
+				.collect(Collectors.groupingBy(Account::getOwner));
+		accounts.forEach((k,v)->{
+			report.append("Owner : "+k.getEmail()+"\n");
+			v.forEach(f->{
+				report.append("\t\t"+f.generateReport()+"\n");
+			});
+		});
+		return report.toString();
 	}
 
 	@Override

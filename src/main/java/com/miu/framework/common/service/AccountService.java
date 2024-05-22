@@ -12,4 +12,5 @@ public interface AccountService  {
     void deposit (String accountNumber, double amount);
     void withdraw (String accountNumber, double amount);
     void addInterest();
+    String generateReport();
 }

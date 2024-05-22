@@ -9,6 +9,16 @@ public class Gold extends CreditAccount{
     }
 
     @Override
+    public double getMonthlyInterest() {
+        return Constants.GOLD_ACCOUNT_INTEREST/100;
+    }
+
+    @Override
+    public double getMinimumPayment() {
+        return Constants.GOLD_MONTHLY_PAYMENT/100;
+    }
+
+    @Override
     public double calculateInterest(double amount) {
         return amount* Constants.GOLD_ACCOUNT_INTEREST/100;
     }
