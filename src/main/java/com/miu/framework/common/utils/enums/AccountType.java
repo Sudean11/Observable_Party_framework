@@ -1,4 +1,4 @@
-package com.miu.framework.creditCard.constants;
+package com.miu.framework.common.utils.enums;
 
 public enum AccountType {
     GOLD,

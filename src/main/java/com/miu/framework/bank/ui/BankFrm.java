@@ -1,8 +1,8 @@
 package com.miu.framework.bank.ui;
 
-import com.miu.framework.common.Factory.DAOAndServiceImpl;
-import com.miu.framework.bank.constants.BankAccountType;
-import com.miu.framework.common.command.AddInterestCommand;
+import com.miu.framework.common.Factory.DAOFactoryImpl;
+import com.miu.framework.common.utils.enums.BankAccountType;
+import com.miu.framework.bank.commands.AddInterestCommand;
 import com.miu.framework.common.command.Command;
 import com.miu.framework.common.service.AccountService;
 import com.miu.framework.common.service.AccountServiceImpl;
@@ -28,7 +28,7 @@ public class BankFrm extends javax.swing.JFrame
     BankFrm myframe;
     private Object rowdata[];
 	//TODO make this dynamic, it is not thread safe here
-	AccountService bankService = new AccountServiceImpl(DAOAndServiceImpl.getDAOService().createAccountDAO(), DAOAndServiceImpl.getDAOService().createPartyDAO());
+	AccountService bankService = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createAccountDAO(), DAOFactoryImpl.getDAOService().createPartyDAO());
 	public BankFrm()
 	{
 		myframe = this;

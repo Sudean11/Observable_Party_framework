@@ -3,8 +3,8 @@ package com.miu.framework.bank.ui;
 
 import com.miu.framework.bank.entities.Company;
 import com.miu.framework.common.command.Command;
-import com.miu.framework.common.command.CreateCompanyAccountCommand;
-import com.miu.framework.bank.constants.BankAccountType;
+import com.miu.framework.bank.commands.CreateCompanyAccountCommand;
+import com.miu.framework.common.utils.enums.BankAccountType;
 import com.miu.framework.common.service.AccountService;
 
 public class JDialog_AddCompAcc extends javax.swing.JDialog

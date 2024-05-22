@@ -1,13 +1,14 @@
-package com.miu.framework.common.command;
+package com.miu.framework.bank.commands;
 
-import com.miu.framework.bank.constants.BankAccountType;
+import com.miu.framework.common.command.Command;
+import com.miu.framework.common.utils.enums.BankAccountType;
 import com.miu.framework.bank.entities.Person;
-import com.miu.framework.bank.entities.StrategyAccountType;
-import com.miu.framework.bank.entities.StrategyCheckingAccount;
-import com.miu.framework.bank.entities.StrategySavingsAccount;
+import com.miu.framework.common.strategy.StrategyAccountType;
+import com.miu.framework.bank.strategy.StrategyCheckingAccount;
+import com.miu.framework.bank.strategy.StrategySavingsAccount;
 import com.miu.framework.common.service.AccountService;
 
-public class CreatePersonalAccountCommand implements Command{
+public class CreatePersonalAccountCommand implements Command {
     AccountService bankService;
     Person person;
 

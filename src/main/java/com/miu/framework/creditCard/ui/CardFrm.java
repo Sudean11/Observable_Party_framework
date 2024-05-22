@@ -1,10 +1,9 @@
 package com.miu.framework.creditCard.ui;
 
-import com.miu.framework.common.Factory.DAOAndServiceImpl;
-import com.miu.framework.common.command.*;
+import com.miu.framework.common.Factory.DAOFactoryImpl;
 import com.miu.framework.common.service.AccountService;
 import com.miu.framework.common.service.AccountServiceImpl;
-import com.miu.framework.creditCard.constants.AccountType;
+import com.miu.framework.common.utils.enums.AccountType;
 
 import java.awt.BorderLayout;
 
@@ -32,7 +31,7 @@ public class CardFrm extends javax.swing.JFrame
     private Object rowdata[];
 
 	//TODO remove initialization from here
-	AccountService creditService = new AccountServiceImpl(DAOAndServiceImpl.getDAOService().createCreditCardAccountDAO(), DAOAndServiceImpl.getDAOService().createCreditCardPartyDAO());
+	AccountService creditService = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO(), DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
 
 	public CardFrm()
 	{

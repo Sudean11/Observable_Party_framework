@@ -1,4 +1,4 @@
-package com.miu.framework.bank.constants;
+package com.miu.framework.common.utils.enums;
 
 public enum BankAccountType {
     SAVING,
