@@ -1,32 +1,16 @@
 package com.miu.framework.common.command;
 
-import com.miu.framework.common.constants.BankAccountType;
+import com.miu.framework.creditCard.entities.Person;
 import com.miu.framework.common.service.AccountService;
 
 public class CreateCreditCardAccountCommand implements Command{
 
     AccountService creditCardService;
-    String accountNumber;
-    String clientName;
-    String street;
-    String city;
-    String state;
-    String zip;
-    String dob;
-    String email;
-    BankAccountType bankAccountType;
+    Person person;
 
-    public CreateCreditCardAccountCommand(AccountService accountService,
-                                        String accountNumber,
-                                        String clientName,
-                                        String street,
-                                        String city,
-                                        String state,
-                                        String zip,
-                                        String dob,
-                                        String email,
-                                        BankAccountType bankAccountType) {
+    public CreateCreditCardAccountCommand(AccountService accountService, Person person) {
         creditCardService = accountService;
+        this.person = person;
     }
 
     @Override

@@ -1,8 +1,7 @@
 package com.miu.framework.bank.ui;
 
 import com.miu.framework.common.Factory.DAOAndServiceImpl;
-import com.miu.framework.common.command.*;
-import com.miu.framework.common.constants.BankAccountType;
+import com.miu.framework.bank.constants.BankAccountType;
 import com.miu.framework.common.service.AccountService;
 import com.miu.framework.common.service.AccountServiceImpl;
 
@@ -28,9 +27,6 @@ public class BankFrm extends javax.swing.JFrame
     private Object rowdata[];
 
 	AccountService bankService = new AccountServiceImpl(new DAOAndServiceImpl());
-	private Command addInterestCommand = new AddInterestCommand(bankService, "");
-	private Command depositeCommand = new DepositeCommand(bankService);
-//	private Command withdrawCommand = new WithdrawCommand(bankService);
     
 	public BankFrm()
 	{
@@ -280,7 +276,7 @@ public class BankFrm extends javax.swing.JFrame
             long currentamount = Long.parseLong(samount);
 		    long newamount=currentamount+deposit;
 		    model.setValueAt(String.valueOf(newamount),selection, 5);
-			depositeCommand.execute();
+//			depositeCommand.execute();
 		}
 		
 		
@@ -317,7 +313,7 @@ public class BankFrm extends javax.swing.JFrame
 	void JButtonAddinterest_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		  JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
-		  addInterestCommand.execute();
+//		  addInterestCommand.execute();
 	    
 	}
 }

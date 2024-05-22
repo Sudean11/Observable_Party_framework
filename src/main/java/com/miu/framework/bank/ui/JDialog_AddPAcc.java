@@ -3,7 +3,10 @@ package com.miu.framework.bank.ui;
 		A basic implementation of the JDialog class.
 */
 
-import com.miu.framework.common.constants.BankAccountType;
+import com.miu.framework.bank.entities.Person;
+import com.miu.framework.common.command.Command;
+import com.miu.framework.common.command.CreatePersonalAccountCommand;
+import com.miu.framework.bank.constants.BankAccountType;
 import com.miu.framework.common.service.AccountService;
 
 public class JDialog_AddPAcc extends javax.swing.JDialog
@@ -184,6 +187,11 @@ public class JDialog_AddPAcc extends javax.swing.JDialog
            parentframe.accountType= BankAccountType.CHECKING;
            else
            parentframe.accountType=BankAccountType.SAVING;
+
+	   Person person = new Person(parentframe.accountnr, parentframe.clientName, parentframe.street, parentframe.city, parentframe.state, parentframe.zip, JTextField_BD.getText(), JTextField_EM.getText(), parentframe.accountType);
+	   Command createAccountCommand = new CreatePersonalAccountCommand(bankService, person);
+	   createAccountCommand.execute();
+
 	   parentframe.newaccount=true;
 
        dispose();

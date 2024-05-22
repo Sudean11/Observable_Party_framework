@@ -1,11 +1,11 @@
 package com.miu.framework.bank.ui;
 
 
+import com.miu.framework.bank.entities.Company;
 import com.miu.framework.common.command.Command;
 import com.miu.framework.common.command.CreateCompanyAccountCommand;
-import com.miu.framework.common.constants.BankAccountType;
+import com.miu.framework.bank.constants.BankAccountType;
 import com.miu.framework.common.service.AccountService;
-import com.miu.framework.common.service.BankService;
 
 public class JDialog_AddCompAcc extends javax.swing.JDialog
 {
@@ -152,7 +152,9 @@ public class JDialog_AddCompAcc extends javax.swing.JDialog
            else
            parentframe.accountType=BankAccountType.SAVING;
 
-	   Command createAccountCommand = new CreateCompanyAccountCommand(bankService, parentframe.accountnr, parentframe.clientName, parentframe.street, parentframe.city, parentframe.state, parentframe.zip, Integer.parseInt(JTextField_NoOfEmp.getText()),JTextField_EM.getText(), parentframe.accountType);
+
+		Company company = new Company(parentframe.accountnr, parentframe.clientName, parentframe.street, parentframe.city, parentframe.state, parentframe.zip, Integer.parseInt(JTextField_NoOfEmp.getText()),JTextField_EM.getText(), parentframe.accountType);
+	   Command createAccountCommand = new CreateCompanyAccountCommand(bankService, company);
 	   createAccountCommand.execute();
 	   parentframe.newaccount=true;
 
