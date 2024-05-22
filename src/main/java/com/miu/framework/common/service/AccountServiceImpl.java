@@ -1,5 +1,6 @@
 package com.miu.framework.common.service;
 import com.miu.framework.bank.entities.Transaction;
+import com.miu.framework.bank.observer.EmailObserver;
 import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.observer.Observer;
@@ -26,7 +27,6 @@ public class AccountServiceImpl implements AccountService, Observable {
 
 	public void deposit(String accountNumber, double amount) {
 		System.out.println("Amount :: "+amount);
-
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.deposit(amount);
 		accountDAO.updateAccount(account);

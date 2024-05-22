@@ -5,10 +5,23 @@ import com.miu.framework.common.entity.Party;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class CreditCardPartyDAO implements PartyDAO{
     List<Party> creditParties = new ArrayList<>();
 
+    private volatile static CreditCardPartyDAO instance;
+
+    public static CreditCardPartyDAO getPartyDAO(){
+        if(Objects.isNull(instance)){
+            synchronized (CreditCardPartyDAO.class){
+                if(Objects.isNull(instance)){
+                    instance = new CreditCardPartyDAO();
+                }
+            }
+        }
+        return instance;
+    }
     public void  save(Party party){
         saveParty(party);
     };

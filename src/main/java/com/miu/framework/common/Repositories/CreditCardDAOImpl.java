@@ -8,6 +8,19 @@ import java.util.Objects;
 
 public class CreditCardDAOImpl implements AccountDAO{
     List<Account> creditCards;
+
+    private volatile static CreditCardDAOImpl instance;
+
+    public static CreditCardDAOImpl getPartyDAO(){
+        if(Objects.isNull(instance)){
+            synchronized (CreditCardDAOImpl.class){
+                if(Objects.isNull(instance)){
+                    instance = new CreditCardDAOImpl();
+                }
+            }
+        }
+        return instance;
+    }
     public void  save(Account account){
         creditCards.add(account);
     };

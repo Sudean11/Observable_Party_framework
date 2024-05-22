@@ -5,10 +5,22 @@ import com.miu.framework.common.entity.Party;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class PartyDAOImpl implements PartyDAO {
     List<Party> parties = new ArrayList<>();
+    private volatile static PartyDAOImpl instance;
 
+    public static PartyDAOImpl getPartyDAO(){
+        if(Objects.isNull(instance)){
+            synchronized (PartyDAOImpl.class){
+                if(Objects.isNull(instance)){
+                    instance = new PartyDAOImpl();
+                }
+            }
+        }
+        return instance;
+    }
     public void  save(Party party){
         saveParty(party);
     };
