@@ -1,6 +1,10 @@
 package com.miu.framework.creditCard.ui;
 
+import com.miu.framework.common.Factory.DAOAndServiceImpl;
 import com.miu.framework.common.command.*;
+import com.miu.framework.common.service.AccountService;
+import com.miu.framework.common.service.AccountServiceImpl;
+import com.miu.framework.creditCard.constants.AccountType;
 
 import java.awt.BorderLayout;
 
@@ -18,7 +22,8 @@ public class CardFrm extends javax.swing.JFrame
     /****
      * init variables in the object
      ****/
-    String clientName,street,city, zip, state,accountType,amountDeposit,expdate, ccnumber;
+    String clientName,street,city, zip, state,amountDeposit,expdate, ccnumber;
+	AccountType accountType;
     boolean newaccount;
     private DefaultTableModel model;
     private JTable JTable1;
@@ -26,11 +31,9 @@ public class CardFrm extends javax.swing.JFrame
     CardFrm thisframe;
     private Object rowdata[];
 
-//	private Command createAccountCommand = new CreateAccountCommand(new BankService());
-//	private Command depositeCommand = new DepositeCommand(new BankService());
-//	private Command generateReportCommand = new GenerateReportCommand(new BankService());
-//	private Command withdrawCommand = new WithdrawCommand(new BankService());
-    
+	AccountService creditService = new AccountServiceImpl(new DAOAndServiceImpl());
+
+
 	public CardFrm()
 	{
 		thisframe=this;
@@ -202,7 +205,7 @@ public class CardFrm extends javax.swing.JFrame
 		 set the boundaries and show it 
 		*/
 		
-		JDialog_AddCCAccount ccac = new JDialog_AddCCAccount(thisframe);
+		JDialog_AddCCAccount ccac = new JDialog_AddCCAccount(thisframe, creditService);
 		ccac.setBounds(450, 20, 300, 380);
 		ccac.show();
 
@@ -227,7 +230,6 @@ public class CardFrm extends javax.swing.JFrame
 		JDialogGenBill billFrm = new JDialogGenBill();
 		billFrm.setBounds(450, 20, 400, 350);
 		billFrm.show();
-//	    generateReportCommand.execute();
 	}
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event)
@@ -249,8 +251,6 @@ public class CardFrm extends javax.swing.JFrame
 		    long newamount=currentamount+deposit;
 		    model.setValueAt(String.valueOf(newamount),selection, 4);
 		}
-//		depositeCommand.execute();
-		
 	}
 
 	void JButtonWithdraw_actionPerformed(java.awt.event.ActionEvent event)
@@ -275,8 +275,6 @@ public class CardFrm extends javax.swing.JFrame
 		       JOptionPane.showMessageDialog(JButton_Withdraw, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
 		    }
 		}
-//		withdrawCommand.execute();
-		
 	}
 	
 }

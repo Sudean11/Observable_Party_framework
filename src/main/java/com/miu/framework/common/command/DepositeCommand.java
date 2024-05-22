@@ -14,5 +14,4 @@ public class DepositeCommand implements Command {
         System.out.println("Deposite Command");
         accountService.deposit();
     }
-
 }
