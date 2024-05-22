@@ -53,12 +53,19 @@ public class Person extends Party {
         return zip;
     }
 
+    public AccountType getCreditAccountType() {
+        return creditAccountType;
+    }
+
+    @Override
     public String getExpDate() {
         return expDate;
     }
 
-    public AccountType getCreditAccountType() {
-        return creditAccountType;
+
+    @Override
+    public String getAccountOwnerType(){
+        return ""+this.getClass().getSimpleName().charAt(0);
     }
 
 

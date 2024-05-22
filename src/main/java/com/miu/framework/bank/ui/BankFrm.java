@@ -2,7 +2,6 @@ package com.miu.framework.bank.ui;
 
 import com.miu.framework.bank.commands.AddInterestCommand;
 import com.miu.framework.common.Factory.DAOFactoryImpl;
-import com.miu.framework.common.Factory.ServiceFactoryImpl;
 import com.miu.framework.common.command.Command;
 import com.miu.framework.common.command.GetAllAccountsCommand;
 import com.miu.framework.common.entity.Account;

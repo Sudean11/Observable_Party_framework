@@ -85,7 +85,7 @@ public class JDialog_Withdraw extends javax.swing.JDialog
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
         parentframe.amountDeposit=JTextField_AMT.getText();
-		Command widthdrawCommand = new WithdrawCommand(parentframe.creditService,name, Double.parseDouble(parentframe.amountDeposit));
+		Command widthdrawCommand = new WithdrawCommand(parentframe.creditService, parentframe.ccnumber, Double.parseDouble(parentframe.amountDeposit));
 		widthdrawCommand.execute();
 		dispose();
 	}

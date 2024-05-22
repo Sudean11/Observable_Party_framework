@@ -40,6 +40,10 @@ public abstract class Party {
     public String getAccountOwnerType(){
         throw new UnsupportedOperationException();
     }
+
+    public String getExpDate(){
+        throw new UnsupportedOperationException();
+    }
 }
 
 
