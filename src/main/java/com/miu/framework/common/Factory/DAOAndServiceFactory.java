@@ -8,4 +8,7 @@ public interface DAOAndServiceFactory {
     public abstract AccountDAO createAccountDAO();
     public abstract AccountService createAccountService();
     public abstract PartyDAO createPartyDAO();
+
+    public AccountDAO createCreditCardAccountDAO();
+    public PartyDAO createCreditCardPartyDAO();
 }

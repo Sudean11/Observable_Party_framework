@@ -25,9 +25,8 @@ public class BankFrm extends javax.swing.JFrame
     private JScrollPane JScrollPane1;
     BankFrm myframe;
     private Object rowdata[];
-
-	AccountService bankService = new AccountServiceImpl(new DAOAndServiceImpl());
-    
+	//TODO make this dynamic, it is not thread safe here
+	AccountService bankService = new AccountServiceImpl(DAOAndServiceImpl.getDAOService().createAccountDAO(), DAOAndServiceImpl.getDAOService().createPartyDAO());
 	public BankFrm()
 	{
 		myframe = this;

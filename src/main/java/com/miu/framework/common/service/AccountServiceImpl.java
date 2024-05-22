@@ -3,6 +3,7 @@ import com.miu.framework.bank.entities.StrategyAccountType;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.observer.Observer;
 import com.miu.framework.common.Factory.DAOAndServiceImpl;
+import com.miu.framework.common.Repositories.PartyDAO;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.Repositories.AccountDAO;
 import com.miu.framework.common.Factory.DAOAndServiceFactory;
@@ -15,23 +16,34 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService, Observable {
 
 	List<Observer> observerList = new ArrayList<>();
-	private final AccountDAO accountDAO;
+	private  AccountDAO accountDAO;
+	private  PartyDAO partyDAO;
 
-	public AccountServiceImpl(DAOAndServiceFactory factory){
-		accountDAO = factory.createAccountDAO();
+	public AccountServiceImpl(AccountDAO accountDAO, PartyDAO partyDAO){
+		this.accountDAO = accountDAO;
+		this.partyDAO = partyDAO;
 	}
 
 	public void deposit(String accountNumber, double amount) {
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.deposit(amount);
 		accountDAO.updateAccount(account);
-		notifyObservers(account,  amount);
+		notifyObservers(account, amount);
 	}
 
 	@Override
 	public Account createAccount(Party party, StrategyAccountType accountTypeStrategy, String accountNumber) {
-		System.out.println("Called");
-		return new Account(accountNumber, party, accountTypeStrategy);
+		Account account =  new Account(accountNumber, party, accountTypeStrategy);
+		Party partyExists = partyDAO.loadParty(party.getEmail());
+		if(partyExists != null){
+			party = partyDAO.loadParty(party.getEmail());
+		}else{
+			partyDAO.saveParty(party);
+		}
+		accountDAO.save(account);
+		party.addAccount(account);
+		partyDAO.updateParty(party);
+		return account;
 	}
 
 	public Account getAccount(String accountNumber) {

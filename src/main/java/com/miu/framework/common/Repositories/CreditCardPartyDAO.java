@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class PartyDAOImpl implements PartyDAO {
-    List<Party> parties = new ArrayList<>();
+public class CreditCardPartyDAO implements PartyDAO{
+    List<Party> creditParties = new ArrayList<>();
 
     public void  save(Party party){
         saveParty(party);
@@ -15,12 +15,12 @@ public class PartyDAOImpl implements PartyDAO {
     public void updateParty(Party party){
         Party Partyexist = loadParty(party.getEmail());
         if (Partyexist != null) {
-            parties.remove(Partyexist); // remove the old
-            parties.add(party); // add the new
+            creditParties.remove(Partyexist); // remove the old
+            creditParties.add(party); // add the new
         }
     };
     public Party loadParty(String partyEmail){
-        for (Party party : parties) {
+        for (Party party : creditParties) {
             if (party.getEmail().equals(partyEmail)) {
                 return party;
             }
@@ -28,14 +28,14 @@ public class PartyDAOImpl implements PartyDAO {
         return null;
     };
     public Collection<Party> getParties(){
-        return parties;
+        return creditParties;
     }
 
     @Override
     public void saveParty(Party party) {
-        parties.add(party);
+        creditParties.add(party);
     }
     public void removeParty(Party party){
-        parties.remove(party);
+        creditParties.remove(party);
     }
 }
