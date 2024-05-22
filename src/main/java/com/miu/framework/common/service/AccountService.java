@@ -14,4 +14,6 @@ public interface AccountService  {
     void withdraw (String accountNumber, double amount);
     void addInterest();
     String generateReport();
+
+    String getTransaction(String accountNumber);
 }

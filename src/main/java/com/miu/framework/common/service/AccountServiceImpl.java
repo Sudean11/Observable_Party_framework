@@ -1,4 +1,5 @@
 package com.miu.framework.common.service;
+import com.miu.framework.bank.entities.Transaction;
 import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.observer.Observer;
@@ -9,10 +10,7 @@ import com.miu.framework.common.Repositories.AccountDAO;
 import com.miu.framework.common.Factory.DAOFactory;
 import com.miu.framework.common.entity.Party;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements AccountService, Observable {
@@ -91,6 +89,11 @@ public class AccountServiceImpl implements AccountService, Observable {
 			});
 		});
 		return report.toString();
+	}
+
+	@Override
+	public String getTransaction(String accountNumber) {
+		return accountDAO.loadAccount(accountNumber).getTransactionHistory().stream().map(Transaction::toString).collect(Collectors.toList()).toString();
 	}
 
 	@Override
