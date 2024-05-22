@@ -5,13 +5,11 @@ import com.miu.framework.creditCard.constants.AccountType;
 
 public class Person extends Party {
     private String accountNumber;
-    private String clientName;
     private String street;
     private String city;
     private String state;
     private String zip;
     private String expDate;
-    private String email;
     private AccountType bankAccountType;
 
     public Person(String accountNumber,
@@ -25,7 +23,7 @@ public class Person extends Party {
                   AccountType bankAccountType) {
         super(clientName, email, accountNumber);
         this.accountNumber = accountNumber;
-        this.clientName = clientName;
+        this.name = clientName;
         this.street = street;
         this.city = city;
         this.state = state;

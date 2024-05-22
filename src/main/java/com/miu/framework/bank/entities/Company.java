@@ -5,13 +5,11 @@ import com.miu.framework.common.entity.Party;
 
 public class Company extends Party {
     private String accountNumber;
-    private String clientName;
     private String street;
     private String city;
     private String state;
     private String zip;
     private int numberOfEmployees;
-    private String email;
     private BankAccountType bankAccountType;
 
     public Company(String accountNumber,
@@ -25,7 +23,7 @@ public class Company extends Party {
                    BankAccountType bankAccountType) {
         super(clientName, email, accountNumber);
         this.accountNumber = accountNumber;
-        this.clientName = clientName;
+        this.name = clientName;
         this.street = street;
         this.city = city;
         this.state = state;
