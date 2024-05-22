@@ -31,7 +31,7 @@ public class CardFrm extends javax.swing.JFrame
     private Object rowdata[];
 
 	//TODO remove initialization from here
-	AccountService creditService = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO(), DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
+	AccountService creditService = AccountServiceImpl.getAccountServiceForBankImpl();
 
 	public CardFrm()
 	{

@@ -1,6 +1,5 @@
 package com.miu.framework.common.service;
 import com.miu.framework.bank.entities.Transaction;
-import com.miu.framework.bank.observer.EmailObserver;
 import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.observer.Observer;
@@ -15,6 +14,31 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements AccountService, Observable {
+
+	private volatile static AccountServiceImpl instanceForBank;
+	private volatile static AccountServiceImpl instanceForCreditCard;
+
+	public static AccountServiceImpl getAccountServiceForBankImpl(){
+		if(Objects.isNull(instanceForBank)){
+			synchronized (AccountServiceImpl.class){
+				if(Objects.isNull(instanceForBank)){
+					instanceForBank = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO(), DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
+				}
+			}
+		}
+		return instanceForBank;
+	}
+
+	public static AccountServiceImpl getAccountServiceForCreditCardImpl(){
+		if(Objects.isNull(instanceForCreditCard)){
+			synchronized (AccountServiceImpl.class){
+				if(Objects.isNull(instanceForCreditCard)){
+					instanceForCreditCard = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO(), DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
+				}
+			}
+		}
+		return instanceForCreditCard;
+	}
 
 	List<Observer> observerList = new ArrayList<>();
 	private  AccountDAO accountDAO;
@@ -69,8 +93,6 @@ public class AccountServiceImpl implements AccountService, Observable {
 
 	@Override
 	public void addInterest() {
-		DAOFactory accountDao = new DAOFactoryImpl();
-		AccountDAO accountDAO = accountDao.createAccountDAO();
 		List<Account> accounts = accountDAO.getAccounts();
 		for(Account account: accounts){
 			account.deposit(account.calculateInterest(account.getBalance()));

@@ -37,7 +37,7 @@ public class JDialogGenBill extends javax.swing.JDialog
 
 
 		billstring = "Ayoub";
-		AccountService creditService = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO(), DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
+		AccountService creditService = AccountServiceImpl.getAccountServiceForCreditCardImpl();
 		JTextField1.setText(creditService.generateReport());
 		//}}
 	
