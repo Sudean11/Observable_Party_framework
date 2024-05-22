@@ -47,7 +47,7 @@ public class CardFrm extends javax.swing.JFrame
 		thisframe=this;
 		
 		setTitle("Credit-card processing Application.");
-		setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0,0));
 		setSize(575,310);
 		setVisible(false);
@@ -150,7 +150,6 @@ public class CardFrm extends javax.swing.JFrame
 		try {
 		    	this.setVisible(false);    // hide the Frame
 		    	this.dispose();            // free the system resources
-		    	System.exit(0);            // close the application
 		} catch (Exception e) {
 		}
 	}
@@ -202,7 +201,8 @@ public class CardFrm extends javax.swing.JFrame
     //this will exit from the system
     void JButtonExit_actionPerformed(java.awt.event.ActionEvent event)
 	{
-		System.exit(0);
+		this.setVisible(false);
+		this.dispose();
 	}
 
 	void JButtonNewCCAC_actionPerformed(java.awt.event.ActionEvent event)
