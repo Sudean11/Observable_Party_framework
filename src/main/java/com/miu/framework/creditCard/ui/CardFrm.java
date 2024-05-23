@@ -1,6 +1,7 @@
 package com.miu.framework.creditCard.ui;
 
 import com.miu.framework.common.Factory.DAOFactoryImpl;
+import com.miu.framework.common.Factory.ServiceFactoryImpl;
 import com.miu.framework.common.command.Command;
 import com.miu.framework.common.command.GetAllAccountsCommand;
 import com.miu.framework.common.entity.Account;
@@ -39,7 +40,7 @@ public class CardFrm extends javax.swing.JFrame
     private Object rowdata[];
 
 	//TODO remove initialization from here
-	AccountService creditService = AccountServiceImpl.getAccountServiceForBankImpl();
+	AccountService creditService = ServiceFactoryImpl.getAccountServiceForBankImpl().getAccountServiceReferencedCreditCard();
 	private ResultReceiver<Collection<Account>> accountsReceiver = new AccountsResultReceiver();
 	private ResultReceiver<String> reportReceiver;
 
