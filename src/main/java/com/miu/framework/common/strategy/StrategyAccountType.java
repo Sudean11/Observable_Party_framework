@@ -1,8 +1,8 @@
 package com.miu.framework.common.strategy;
 
-import java.io.Serializable;
+import com.miu.framework.common.entity.Account;
 
-public interface StrategyAccountType{
+public interface StrategyAccountType {
 
     public double calculateInterest(double amount);
 
@@ -12,5 +12,13 @@ public interface StrategyAccountType{
 
     default double getMinimumPayment(){
         return 0;
+    };
+    public default String generateReport(Account account){
+        return " Account Number  : "+account.getAccountNumber()+"\t"+"Account Balance = "+account.getBalance()
+                +"\n"+" Interest = "+ account.getTransactionHistory()
+                .stream().limit(5)
+                .map(f->f.toString())
+                .reduce("",(x,y)->x+"\n"+y)
+                .toString();
     };
 }

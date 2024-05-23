@@ -2,21 +2,17 @@ package com.miu.framework.bank.ui;
 
 import com.miu.framework.bank.observer.EmailObserver;
 import com.miu.framework.bank.observer.Observable;
+import com.miu.framework.bank.reveiver.TransactionHistroyReceiver;
 import com.miu.framework.common.Factory.*;
 import com.miu.framework.common.utils.enums.BankAccountType;
 import com.miu.framework.bank.commands.AddInterestCommand;
-import com.miu.framework.bank.entities.Transaction;
-import com.miu.framework.common.Factory.DAOFactoryImpl;
-import com.miu.framework.common.Factory.DAOFactoryImpl;
 import com.miu.framework.common.command.Command;
-import com.miu.framework.common.command.TransactionHistoryCommand;
+import com.miu.framework.bank.commands.TransactionHistoryCommand;
 import com.miu.framework.common.command.GetAllAccountsCommand;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.receiver.AccountsResultReceiver;
 import com.miu.framework.common.receiver.ResultReceiver;
 import com.miu.framework.common.service.AccountService;
-import com.miu.framework.common.service.AccountServiceImpl;
-import com.miu.framework.common.utils.enums.BankAccountType;
 
 import java.awt.*;
 import java.util.Collection;
@@ -39,16 +35,24 @@ public class BankFrm extends javax.swing.JFrame
 	private JScrollPane JScrollPane1;
 	BankFrm myframe;
 	private Object rowdata[];
-	//TODO make this dynamic, it is not thread safe here
-	AccountService bankService = ServiceFactoryImpl.getAccountServiceForBankImpl().getAccountServiceReferencedBank();
-	//TODO Take this to constructor
-	private ResultReceiver<Collection<Account>> accountsReceiver = new AccountsResultReceiver();
 
-	Command getAllAccountsCommand = new GetAllAccountsCommand(bankService, accountsReceiver);
+	AccountService bankService;
+
+	private ResultReceiver<Collection<Account>> accountsReceiver;
+
+	Command getAllAccountsCommand;
+	ResultReceiver<String> transactionHistoryReceiver;
 	public BankFrm()
 	{
 		myframe = this;
+		bankService = ServiceFactoryImpl.getAccountServiceForBankImpl().getAccountServiceReferencedBank();
+
 		setupConfiguration();
+
+		accountsReceiver = new AccountsResultReceiver();
+		getAllAccountsCommand = new GetAllAccountsCommand(bankService, accountsReceiver);
+		transactionHistoryReceiver = new TransactionHistroyReceiver();
+
 
 		setTitle("Bank Application.");
 		setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
@@ -256,10 +260,18 @@ private void setupConfiguration() {
 
 	void JButtonTransactionHistory_actionPerformed(java.awt.event.ActionEvent event) {
 		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-		if (selection >= 0) {
-			String accnr = (String) model.getValueAt(selection, 0);
-			Command transactionHistoryCommand = new TransactionHistoryCommand(myframe, bankService, accnr);
+		String accnr = (String) model.getValueAt(selection, 0);
+
+		System.out.println("Transaction Report...");
+		if (!accnr.isEmpty()) {
+
+			Command transactionHistoryCommand = new TransactionHistoryCommand(bankService, accnr, transactionHistoryReceiver);
 			transactionHistoryCommand.execute();
+			String transactionReport = transactionHistoryReceiver.getResult();
+			JDialog_TransactionHistory historyFrm = new JDialog_TransactionHistory(this, transactionReport);
+
+			historyFrm.setBounds(450, 20, 400, 350);
+			historyFrm.show();
 		}
 	}
 

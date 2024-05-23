@@ -106,9 +106,10 @@ public class AccountServiceImpl implements AccountService, Observable {
 		accounts.forEach((k,v)->{
 			report.append("Owner : "+k.getEmail()+"\n");
 			v.forEach(f->{
-				report.append("\t\t"+f.generateReport()+"\n");
+				report.append(f.generateReport()+"\n");
 			});
 		});
+		System.out.println(report.toString());
 		return report.toString();
 	}
 
