@@ -1,0 +1,7 @@
+package com.miu.observable_party_account.framework.utils.enums;
+
+public enum AccountType {
+    GOLD,
+    SILVER,
+    BRONZE
+}
