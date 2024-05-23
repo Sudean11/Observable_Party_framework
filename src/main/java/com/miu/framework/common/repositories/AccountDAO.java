@@ -1,12 +1,9 @@
-package com.miu.framework.common.Repositories;
+package com.miu.framework.common.repositories;
 
 import com.miu.framework.common.entity.Account;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 public  interface  AccountDAO {
 

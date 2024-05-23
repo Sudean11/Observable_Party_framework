@@ -1,14 +1,12 @@
 package com.miu.framework.creditCard.ui;
 
-import com.miu.framework.common.Factory.DAOFactoryImpl;
-import com.miu.framework.common.Factory.ServiceFactoryImpl;
+import com.miu.framework.common.Factory.serviceFactory.CreditCardServiceFactory;
 import com.miu.framework.common.command.Command;
 import com.miu.framework.common.command.GetAllAccountsCommand;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.receiver.AccountsResultReceiver;
 import com.miu.framework.common.receiver.ResultReceiver;
 import com.miu.framework.common.service.AccountService;
-import com.miu.framework.common.service.AccountServiceImpl;
 import com.miu.framework.common.utils.enums.AccountType;
 import com.miu.framework.creditCard.commands.GenerateReportCommand;
 import com.miu.framework.creditCard.receiver.ReportResultReceiver;
@@ -16,7 +14,6 @@ import com.miu.framework.creditCard.receiver.ReportResultReceiver;
 import java.awt.BorderLayout;
 import java.util.Collection;
 
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
@@ -40,18 +37,19 @@ public class CardFrm extends javax.swing.JFrame
     private Object rowdata[];
 
 	//TODO remove initialization from here
-	AccountService creditService = ServiceFactoryImpl.getAccountServiceForBankImpl().getAccountServiceReferencedCreditCard();
+	AccountService creditService;
 	private ResultReceiver<Collection<Account>> accountsReceiver = new AccountsResultReceiver();
 	private ResultReceiver<String> reportReceiver;
 
-	Command getAllAccountsCommand = new GetAllAccountsCommand(creditService, accountsReceiver);
+	Command getAllAccountsCommand;
 
 
 	public CardFrm()
 	{
 		thisframe=this;
 		reportReceiver = new ReportResultReceiver();
-
+		 creditService = new CreditCardServiceFactory().getService();
+		getAllAccountsCommand = new GetAllAccountsCommand(creditService, accountsReceiver);
 		setTitle("Credit-card processing Application.");
 		setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0,0));

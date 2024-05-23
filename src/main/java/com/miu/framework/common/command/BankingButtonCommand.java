@@ -1,8 +1,7 @@
 package com.miu.framework.common.command;
 
 import com.miu.framework.bank.ui.BankFrm;
-import com.miu.framework.common.Factory.ServiceFactoryImpl;
-import com.miu.framework.main.AppLauncher;
+import com.miu.framework.common.Factory.serviceFactory.BankServiceFactory;
 
 public class BankingButtonCommand implements Command{
 
@@ -14,7 +13,7 @@ public class BankingButtonCommand implements Command{
 
     @Override
     public void execute() {
-        ServiceFactoryImpl.getAccountServiceForBankImpl().getAccountServiceReferencedBank();
+        new BankServiceFactory().getService();
         bankFrm.setVisible(true);
 
     }

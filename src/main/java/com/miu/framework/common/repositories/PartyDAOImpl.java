@@ -1,4 +1,4 @@
-package com.miu.framework.common.Repositories;
+package com.miu.framework.common.repositories;
 
 import com.miu.framework.common.entity.Party;
 

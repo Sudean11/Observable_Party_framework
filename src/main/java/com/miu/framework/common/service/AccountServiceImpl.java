@@ -3,11 +3,9 @@ import com.miu.framework.bank.entities.Transaction;
 import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.observer.Observer;
-import com.miu.framework.common.Factory.DAOFactoryImpl;
-import com.miu.framework.common.Repositories.PartyDAO;
+import com.miu.framework.common.repositories.PartyDAO;
 import com.miu.framework.common.entity.Account;
-import com.miu.framework.common.Repositories.AccountDAO;
-import com.miu.framework.common.Factory.DAOFactory;
+import com.miu.framework.common.repositories.AccountDAO;
 import com.miu.framework.common.entity.Party;
 import com.miu.framework.common.utils.enums.TransactionType;
 
@@ -22,7 +20,7 @@ public class AccountServiceImpl implements AccountService, Observable {
 		if(Objects.isNull(instance)){
 			synchronized (AccountServiceImpl.class){
 				if(Objects.isNull(instance)){
-					instance = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO(), DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
+					instance = new AccountServiceImpl(null, null);
 				}
 			}
 		}

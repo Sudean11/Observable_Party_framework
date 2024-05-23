@@ -1,7 +1,6 @@
 package com.miu.framework.common.command;
 
-import com.miu.framework.bank.ui.BankFrm;
-import com.miu.framework.common.Factory.ServiceFactoryImpl;
+import com.miu.framework.common.Factory.serviceFactory.CreditCardServiceFactory;
 import com.miu.framework.creditCard.ui.CardFrm;
 
 public class CreditCardButtonCommand implements Command {
@@ -13,7 +12,7 @@ public class CreditCardButtonCommand implements Command {
 
     @Override
     public void execute() {
-        ServiceFactoryImpl.getAccountServiceForBankImpl().getAccountServiceReferencedCreditCard();
+        new CreditCardServiceFactory().getService();
         cardFrm.setVisible(true);
     }
 }

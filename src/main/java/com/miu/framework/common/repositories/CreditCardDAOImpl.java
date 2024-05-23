@@ -1,4 +1,4 @@
-package com.miu.framework.common.Repositories;
+package com.miu.framework.common.repositories;
 
 import com.miu.framework.common.entity.Account;
 
@@ -11,7 +11,7 @@ public class CreditCardDAOImpl implements AccountDAO{
 
     private volatile static CreditCardDAOImpl instance;
 
-    public static CreditCardDAOImpl getPartyDAO(){
+    public static CreditCardDAOImpl getAccountDAO(){
         if(Objects.isNull(instance)){
             synchronized (CreditCardDAOImpl.class){
                 if(Objects.isNull(instance)){

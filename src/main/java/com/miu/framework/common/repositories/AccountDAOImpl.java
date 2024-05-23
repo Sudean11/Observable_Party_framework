@@ -1,6 +1,5 @@
-package com.miu.framework.common.Repositories;
+package com.miu.framework.common.repositories;
 
-import com.miu.framework.bank.observer.EmailObserver;
 import com.miu.framework.common.entity.Account;
 
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package com.miu.framework.bank.ui;
 import com.miu.framework.bank.observer.EmailObserver;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.reveiver.TransactionHistroyReceiver;
-import com.miu.framework.common.Factory.*;
+import com.miu.framework.common.Factory.serviceFactory.BankServiceFactory;
 import com.miu.framework.common.utils.enums.BankAccountType;
 import com.miu.framework.bank.commands.AddInterestCommand;
 import com.miu.framework.common.command.Command;
@@ -45,7 +45,7 @@ public class BankFrm extends javax.swing.JFrame
 	public BankFrm()
 	{
 		myframe = this;
-		bankService = ServiceFactoryImpl.getAccountServiceForBankImpl().getAccountServiceReferencedBank();
+		bankService = new BankServiceFactory().getService();
 
 		setupConfiguration();
 
