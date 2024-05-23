@@ -20,10 +20,6 @@ public class Company extends Party {
         return street;
     }
 
-    public String getCity() {
-        return city;
-    }
-
     public String getState() {
         return state;
     }
@@ -59,5 +55,21 @@ public class Company extends Party {
         this.numberOfEmployees = numberOfEmployees;
         this.email = email;
         this.bankAccountType = bankAccountType;
+
+    }
+
+    @Override
+    public String getCity() {
+        return city;
+    }
+
+    @Override
+    public String getAccountType(){
+        return ""+bankAccountType.toString().charAt(0);
+    }
+
+    @Override
+    public String getAccountOwnerType(){
+        return ""+this.getClass().getSimpleName().charAt(0);
     }
 }

@@ -1,5 +1,7 @@
 package com.miu.framework.common.entity;
 
+import com.miu.framework.bank.observer.observerStrategy.ObserverStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,8 @@ public abstract class Party {
         this.email = email;
     }
 
+
+
     public void addAccount(Account account) {
         accounts.add(account);
     }
@@ -24,6 +28,25 @@ public abstract class Party {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getCity(){
+        throw new UnsupportedOperationException();
+    }
+    public String getAccountType(){
+        throw new UnsupportedOperationException();
+    }
+
+    public String getAccountOwnerType(){
+        throw new UnsupportedOperationException();
+    }
+
+    public String getExpDate(){
+        throw new UnsupportedOperationException();
     }
 }
 

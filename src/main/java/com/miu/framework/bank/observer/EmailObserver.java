@@ -1,12 +1,14 @@
 package com.miu.framework.bank.observer;
 
 
+import com.miu.framework.bank.entities.Company;
 import com.miu.framework.bank.entities.Person;
 import com.miu.framework.common.entity.Account;
+import com.miu.framework.common.utils.enums.TransactionType;
 
 import java.util.Objects;
 
-public class EmailObserver implements  Observer{
+public class EmailObserver implements Observer{
 
     private EmailObserver(){}
 
@@ -24,13 +26,7 @@ public class EmailObserver implements  Observer{
     }
 
     @Override
-    public void update(Account account, double amount) {
-        if(account.getOwner() instanceof Person){
-            System.out.println("EMAIL:" +account.getEmail()+" \n Amount: "+amount);
-        }else{
-            if(amount > 500){
-                System.out.println("EMAIL:" +account.getEmail()+" \n Amount: "+amount);
-            }
-        }
+    public void update(Account account, double amount, TransactionType transactionType) {
+        account.sendNotification(account, amount, transactionType);
     }
 }

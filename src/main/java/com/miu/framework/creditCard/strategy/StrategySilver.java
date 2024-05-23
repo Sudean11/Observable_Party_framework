@@ -22,8 +22,5 @@ public class StrategySilver implements StrategyCreditCard {
     public double getMinimumMonthlyPayment(double amount){
         return amount* InterestConstants.SILVER_MONTHLY_PAYMENT/100;
     }
-    @Override
-    public void notifyUsers() {
 
-    }
 }

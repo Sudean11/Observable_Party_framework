@@ -24,8 +24,4 @@ public class StrategyBronze implements StrategyCreditCard {
         return amount* InterestConstants.BRONZE_MONTHLY_PAYMENT/100;
     }
 
-    @Override
-    public void notifyUsers() {
-
-    }
 }

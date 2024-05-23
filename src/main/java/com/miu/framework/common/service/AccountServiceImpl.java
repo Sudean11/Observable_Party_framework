@@ -1,6 +1,5 @@
 package com.miu.framework.common.service;
 import com.miu.framework.bank.entities.Transaction;
-import com.miu.framework.bank.observer.EmailObserver;
 import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.observer.Observer;
@@ -10,11 +9,33 @@ import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.Repositories.AccountDAO;
 import com.miu.framework.common.Factory.DAOFactory;
 import com.miu.framework.common.entity.Party;
+import com.miu.framework.common.utils.enums.TransactionType;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements AccountService, Observable {
+
+	private volatile static AccountServiceImpl instance;
+
+	public static AccountServiceImpl getAccountServiceForBankImpl(){
+		if(Objects.isNull(instance)){
+			synchronized (AccountServiceImpl.class){
+				if(Objects.isNull(instance)){
+					instance = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO(), DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
+				}
+			}
+		}
+		return instance;
+	}
+
+	public void setAccountDAO(AccountDAO accountDAO) {
+		this.accountDAO = accountDAO;
+	}
+
+	public void setPartyDAO(PartyDAO partyDAO) {
+		this.partyDAO = partyDAO;
+	}
 
 	List<Observer> observerList = new ArrayList<>();
 	private  AccountDAO accountDAO;
@@ -30,13 +51,15 @@ public class AccountServiceImpl implements AccountService, Observable {
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.deposit(amount);
 		accountDAO.updateAccount(account);
-		notifyObservers(account, amount);
+		notifyObservers(account, amount, TransactionType.DEPOSIT);
 	}
 
 	@Override
 	public Account createAccount(Party party, StrategyAccountType accountTypeStrategy, String accountNumber) {
 		Account account =  new Account(accountNumber, party, accountTypeStrategy);
 		Party partyExists = partyDAO.loadParty(party.getEmail());
+
+		//Check if party already exists
 		if(partyExists != null){
 			party = partyDAO.loadParty(party.getEmail());
 		}else{
@@ -60,17 +83,15 @@ public class AccountServiceImpl implements AccountService, Observable {
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.withdraw(amount);
 		if(account.getBalance() < 0){
-			notifyObservers(account, amount);
+			notifyObservers(account, amount, TransactionType.WITHDRAWAL);
 			return;
 		}
 		accountDAO.updateAccount(account);
-		notifyObservers(account, amount);
+		notifyObservers(account, amount, TransactionType.WITHDRAWAL);
 	}
 
 	@Override
 	public void addInterest() {
-		DAOFactory accountDao = new DAOFactoryImpl();
-		AccountDAO accountDAO = accountDao.createAccountDAO();
 		List<Account> accounts = accountDAO.getAccounts();
 		for(Account account: accounts){
 			account.deposit(account.calculateInterest(account.getBalance()));
@@ -108,9 +129,9 @@ public class AccountServiceImpl implements AccountService, Observable {
 	}
 
 	@Override
-	public void notifyObservers(Account account, double amount) {
+	public void notifyObservers(Account account, double amount, TransactionType transactionType) {
 		for(Observer observer: observerList){
-			observer.update(account, amount);
+			observer.update(account, amount, TransactionType.WITHDRAWAL);
 		}
 	}
 }

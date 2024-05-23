@@ -10,8 +10,5 @@ public class StrategySavingsAccount implements StrategyAccountType {
     public double calculateInterest(double amount) {
         return amount * INTEREST_RATE/100;
     }
-    @Override
-    public void notifyUsers() {
 
-    }
 }

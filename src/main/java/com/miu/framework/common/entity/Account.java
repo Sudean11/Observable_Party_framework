@@ -1,5 +1,8 @@
 package com.miu.framework.common.entity;
 
+import com.miu.framework.bank.observer.observerStrategy.CustomBankingStrategy;
+import com.miu.framework.bank.observer.observerStrategy.ObserverStrategy;
+import com.miu.framework.common.service.AccountServiceImpl;
 import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.bank.entities.Transaction;
 import com.miu.framework.common.utils.enums.TransactionType;
@@ -34,6 +37,14 @@ public class Account {
     public String getEmail(){
         return owner.getEmail();
     }
+
+    private ObserverStrategy observerStrategy;
+    public void setObserverStrategy(ObserverStrategy observerStrategy) {
+        this.observerStrategy = observerStrategy;
+    }
+    public ObserverStrategy getObserverStrategy(){
+        return  this.observerStrategy;
+    };
 
     public Account(String accountNumber, Party owner, StrategyAccountType accountTypeStrategy) {
         this.accountTypeStrategy = accountTypeStrategy;
@@ -79,5 +90,11 @@ public class Account {
                 .reduce("",(x,y)->x+"\n"+y)
                 .toString();
     };
+
+    public void sendNotification(Account account, double amount, TransactionType transactionType) {
+        observerStrategy.notifyUser(account, amount, transactionType);
+    }
+
+
 }
 
