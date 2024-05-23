@@ -1,5 +1,6 @@
 package com.miu.framework.common.service;
 
+import com.miu.framework.bank.entities.Transaction;
 import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.entity.Party;
@@ -14,6 +15,5 @@ public interface AccountService  {
     void withdraw (String accountNumber, double amount);
     void addInterest();
     String generateReport();
-
     String getTransaction(String accountNumber);
 }

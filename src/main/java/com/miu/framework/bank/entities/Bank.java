@@ -12,17 +12,5 @@ public class Bank {
         accounts.add(account);
     }
 
-    public void addInterest() {
-        for (Account account : accounts) {
-            //account.addInterest();
-        }
-    }
 
-    public String generateReport() {
-        StringBuilder report = new StringBuilder();
-        for (Account account : accounts) {
-            report.append(account.toString()).append("\n");
-        }
-        return report.toString();
-    }
 }

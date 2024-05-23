@@ -56,4 +56,12 @@ public abstract class CreditAccount extends Account {
                 "        - new balance = "+newBalance+"\n" +
                 "        - total due = "+totalDue;
     }
+
+    public StrategyCreditCard getCardStrategy() {
+        return cardStrategy;
+    }
+
+    public void setCardStrategy(StrategyCreditCard cardStrategy) {
+        this.cardStrategy = cardStrategy;
+    }
 }

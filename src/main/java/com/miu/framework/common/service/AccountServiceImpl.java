@@ -1,5 +1,7 @@
 package com.miu.framework.common.service;
+import com.miu.framework.bank.Rule.MinimumBalanceRule;
 import com.miu.framework.bank.entities.Transaction;
+import com.miu.framework.common.Rule.RuleEngine;
 import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.observer.Observer;
@@ -14,22 +16,23 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements AccountService, Observable {
-
+	RuleEngine ruleEngine = new RuleEngine();
 	List<Observer> observerList = new ArrayList<>();
 	private  AccountDAO accountDAO;
 	private  PartyDAO partyDAO;
-
 	public AccountServiceImpl(AccountDAO accountDAO, PartyDAO partyDAO){
 		this.accountDAO = accountDAO;
 		this.partyDAO = partyDAO;
-	}
+		ruleEngine.addRule(new MinimumBalanceRule(100.0));
 
+	}
 	public void deposit(String accountNumber, double amount) {
 		System.out.println("Amount :: "+amount);
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.deposit(amount);
 		accountDAO.updateAccount(account);
 		notifyObservers(account, amount);
+
 	}
 
 	@Override
@@ -58,14 +61,23 @@ public class AccountServiceImpl implements AccountService, Observable {
 	public void withdraw(String accountNumber, double amount) {
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.withdraw(amount);
+
+		if (ruleEngine.validate(account, amount)) {
+			double balance = account.getBalance();
+			balance-= amount;
+			System.out.println("Withdrew " + amount + ". New balance is " + balance);
+		} else {
+			System.out.println("Withdrawal denied due to rule violation.");
+		}
+
 		if(account.getBalance() < 0){
 			notifyObservers(account, amount);
 			return;
 		}
 		accountDAO.updateAccount(account);
 		notifyObservers(account, amount);
-	}
 
+	}
 	@Override
 	public void addInterest() {
 		DAOFactory accountDao = new DAOFactoryImpl();
@@ -100,7 +112,6 @@ public class AccountServiceImpl implements AccountService, Observable {
 		observerList.add(observer);
 
 	}
-
 	@Override
 	public void removeObserver(Observer observer) {
 		observerList.remove(observer);

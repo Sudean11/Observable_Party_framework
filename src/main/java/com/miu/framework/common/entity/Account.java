@@ -17,7 +17,7 @@ public class Account {
     protected double balance;
     protected Party owner;
 
-    protected double previousBalance;
+
 
 
     protected StrategyAccountType accountTypeStrategy;
@@ -79,5 +79,29 @@ public class Account {
                 .reduce("",(x,y)->x+"\n"+y)
                 .toString();
     };
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public void setOwner(Party owner) {
+        this.owner = owner;
+    }
+
+    public StrategyAccountType getAccountTypeStrategy() {
+        return accountTypeStrategy;
+    }
+
+    public void setAccountTypeStrategy(StrategyAccountType accountTypeStrategy) {
+        this.accountTypeStrategy = accountTypeStrategy;
+    }
+
+    public void setTransactionHistory(List<Transaction> transactionHistory) {
+        this.transactionHistory = transactionHistory;
+    }
 }
 
