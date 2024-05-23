@@ -266,6 +266,7 @@ public class CardFrm extends javax.swing.JFrame
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();
         if (selection >=0){
             String name = (String)model.getValueAt(selection, 0);
+			this.ccnumber =(String) model.getValueAt(selection, 1);
 
 			String samount = (String)model.getValueAt(selection, 4);
 			double currentamount = Double.parseDouble(samount);
@@ -291,7 +292,7 @@ public class CardFrm extends javax.swing.JFrame
 		for(Account account: accounts){
 			rowdata[0] = account.getOwner().getName();
 			rowdata[1] = account.getAccountNumber();
-//			rowdata[2] = account.getOwner().getExpDate();
+			rowdata[2] = account.getOwner().getExpDate();
 			rowdata[3] = account.getOwner().getAccountOwnerType();
 			rowdata[4] = Double.toString(account.getBalance());
 			model.addRow(rowdata);
