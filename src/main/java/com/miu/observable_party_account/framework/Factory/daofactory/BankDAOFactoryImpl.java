@@ -1,6 +1,8 @@
 package com.miu.observable_party_account.framework.Factory.daofactory;
 
 import com.miu.observable_party_account.framework.repositories.*;
+import com.miu.observable_party_account.framework.repositories.daoImpl.AccountDAOImpl;
+import com.miu.observable_party_account.framework.repositories.daoImpl.PartyDAOImpl;
 
 import java.util.Objects;
 

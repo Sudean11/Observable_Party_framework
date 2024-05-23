@@ -126,7 +126,7 @@ public class BankFrm extends javax.swing.JFrame
 
 	}
 
-private void setupConfiguration() {
+	private void setupConfiguration() {
 		Observable observable = (Observable) bankService;
 		observable.registerObserver(EmailObserver.getEmailObserver());
 	}

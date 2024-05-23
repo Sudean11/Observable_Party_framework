@@ -1,8 +1,8 @@
 package com.miu.observable_party_account.framework.Factory.daofactory;
 
 import com.miu.observable_party_account.framework.repositories.AccountDAO;
-import com.miu.observable_party_account.framework.repositories.CreditCardDAOImpl;
-import com.miu.observable_party_account.framework.repositories.CreditCardPartyDAO;
+import com.miu.observable_party_account.framework.repositories.daoImpl.CreditCardDAOImpl;
+import com.miu.observable_party_account.framework.repositories.daoImpl.CreditCardPartyDAO;
 import com.miu.observable_party_account.framework.repositories.PartyDAO;
 
 import java.util.Objects;

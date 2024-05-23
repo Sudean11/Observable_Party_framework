@@ -1,12 +1,13 @@
-package com.miu.observable_party_account.framework.repositories;
+package com.miu.observable_party_account.framework.repositories.daoImpl;
 
 import com.miu.observable_party_account.framework.entity.Account;
+import com.miu.observable_party_account.framework.repositories.AccountDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class CreditCardDAOImpl implements AccountDAO{
+public class CreditCardDAOImpl implements AccountDAO {
     List<Account> creditCards;
 
     private volatile static CreditCardDAOImpl instance;

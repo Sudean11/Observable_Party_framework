@@ -1,20 +1,23 @@
-package com.miu.observable_party_account.framework.repositories;
+package com.miu.observable_party_account.framework.repositories.daoImpl;
 
 import com.miu.observable_party_account.framework.entity.Party;
+import com.miu.observable_party_account.framework.repositories.PartyDAO;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-public class PartyDAOImpl implements PartyDAO {
-    List<Party> parties = new ArrayList<>();
-    private volatile static PartyDAOImpl instance;
-    public static PartyDAOImpl getPartyDAO(){
+public class CreditCardPartyDAO implements PartyDAO {
+    List<Party> creditParties = new ArrayList<>();
+
+    private volatile static CreditCardPartyDAO instance;
+
+    public static CreditCardPartyDAO getPartyDAO(){
         if(Objects.isNull(instance)){
-            synchronized (PartyDAOImpl.class){
+            synchronized (CreditCardPartyDAO.class){
                 if(Objects.isNull(instance)){
-                    instance = new PartyDAOImpl();
+                    instance = new CreditCardPartyDAO();
                 }
             }
         }
@@ -26,12 +29,12 @@ public class PartyDAOImpl implements PartyDAO {
     public void updateParty(Party party){
         Party Partyexist = loadParty(party.getEmail());
         if (Partyexist != null) {
-            parties.remove(Partyexist); // remove the old
-            parties.add(party); // add the new
+            creditParties.remove(Partyexist); // remove the old
+            creditParties.add(party); // add the new
         }
     };
     public Party loadParty(String partyEmail){
-        for (Party party : parties) {
+        for (Party party : creditParties) {
             if (party.getEmail().equals(partyEmail)) {
                 return party;
             }
@@ -39,14 +42,14 @@ public class PartyDAOImpl implements PartyDAO {
         return null;
     };
     public Collection<Party> getParties(){
-        return parties;
+        return creditParties;
     }
 
     @Override
     public void saveParty(Party party) {
-        parties.add(party);
+        creditParties.add(party);
     }
     public void removeParty(Party party){
-        parties.remove(party);
+        creditParties.remove(party);
     }
 }
