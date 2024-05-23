@@ -83,18 +83,15 @@ public class Account {
         transactionHistory.add(transaction);
     }
     public  String generateReport(){
-        return " Account Number  : "+this.accountNumber+"\t"+"Account Balance = "+this.getBalance()
-                +"\n"+" Interest = "+ this.getTransactionHistory()
-                .stream().limit(5)
-                .map(f->f.toString())
-                .reduce("",(x,y)->x+"\n"+y)
-                .toString();
+        return accountTypeStrategy.generateReport(this);
     };
 
     public void sendNotification(Account account, double amount, TransactionType transactionType) {
         observerStrategy.notifyUser(account, amount, transactionType);
     }
-
+    public String generateReport(Account account){
+        return accountTypeStrategy.generateReport(account);
+    }
 
 }
 
