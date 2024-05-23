@@ -11,10 +11,12 @@ public class MinimumBalanceRule implements Rule {
         this.minimumBalance = minimumBalance;
         this.errorMessage = "Balance must not fall below " + minimumBalance;
     }
+
     @Override
     public boolean isSatisfied(Account account, double amount) {
-        return account.getBalance() - amount >= minimumBalance;
+        return false;
     }
+
     @Override
     public String getErrorMessage() {
         return errorMessage;

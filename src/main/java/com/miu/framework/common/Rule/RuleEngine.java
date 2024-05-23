@@ -1,6 +1,6 @@
 package com.miu.framework.common.Rule;
 
-import com.miu.framework.common.entity.Account;
+import com.miu.observable_party_account.framework.entity.Account;
 
 import java.util.ArrayList;
 import java.util.List;
