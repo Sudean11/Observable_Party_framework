@@ -17,7 +17,7 @@ public class PartyDAOImpl implements PartyDAO {
         dataAccess = new DataAccessFacade();
     }
 
-    public static PartyDAOImpl getPartyDAO() {
+    public static PartyDAO getPartyDAO() {
         if (instance == null) {
             synchronized (PartyDAOImpl.class) {
                 if (instance == null) {
@@ -48,6 +48,6 @@ public class PartyDAOImpl implements PartyDAO {
         return dataAccess.getAll(StorageType.PARTIES);
     }
     public void updateParty(Party party) {
-        dataAccess.update(party, party.getEmail(), StorageType.CREDIT_PARTIES);
+        dataAccess.update(party, party.getEmail(), StorageType.PARTIES);
     }
 }

@@ -14,6 +14,6 @@ public class BankingButtonCommand implements Command{
     @Override
     public void execute() {
         bankFrm.setVisible(true);
-
+        bankFrm.getAllCount_actionPerformed();
     }
 }

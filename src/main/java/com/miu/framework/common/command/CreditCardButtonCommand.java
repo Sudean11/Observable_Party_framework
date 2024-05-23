@@ -13,5 +13,6 @@ public class CreditCardButtonCommand implements Command {
     @Override
     public void execute() {
         cardFrm.setVisible(true);
+        cardFrm.getAllCount_actionPerformed();
     }
 }

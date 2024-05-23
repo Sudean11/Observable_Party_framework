@@ -37,6 +37,7 @@ public class DataAccessFacade {
 
     public <T> void save(T entity, String key, StorageType type) {
         StorageHandler<T> handler = StorageHandlerRegistry.getHandler(type);
+        System.out.println("Handler:: "+handler.toString());
         handler.save(entity, key);
     }
 

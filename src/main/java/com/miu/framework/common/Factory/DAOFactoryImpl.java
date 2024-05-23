@@ -30,7 +30,7 @@ public class DAOFactoryImpl implements DAOFactory {
 
     @Override
     public AccountDAO createCreditCardAccountDAO() {
-        return CreditCardDAOImpl.getPartyDAO();
+        return CreditCardDAOImpl.getAccountDAO();
     }
 
     @Override

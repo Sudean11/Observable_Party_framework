@@ -1,6 +1,7 @@
 package com.miu.framework.creditCard.ui;
 
 import com.miu.framework.common.Factory.DAOFactoryImpl;
+import com.miu.framework.common.Factory.ServiceFactoryImpl;
 import com.miu.framework.common.command.Command;
 import com.miu.framework.common.command.GetAllAccountsCommand;
 import com.miu.framework.common.entity.Account;
@@ -39,17 +40,19 @@ public class CardFrm extends javax.swing.JFrame
     private Object rowdata[];
 
 	//TODO remove initialization from here
-	AccountService creditService = AccountServiceImpl.getAccountServiceForBankImpl();
+	AccountService creditService;
 	private ResultReceiver<Collection<Account>> accountsReceiver = new AccountsResultReceiver();
 	private ResultReceiver<String> reportReceiver;
 
-	Command getAllAccountsCommand = new GetAllAccountsCommand(creditService, accountsReceiver);
+	Command getAllAccountsCommand;
 
 
 	public CardFrm()
 	{
 		thisframe=this;
+		creditService = ServiceFactoryImpl.getCreditCardServiceFactory().getAccountServiceReferencedCreditCard();
 		reportReceiver = new ReportResultReceiver();
+		getAllAccountsCommand = new GetAllAccountsCommand(creditService, accountsReceiver);
 
 		setTitle("Credit-card processing Application.");
 		setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
@@ -283,7 +286,7 @@ public class CardFrm extends javax.swing.JFrame
 		}
 	}
 
-	void getAllCount_actionPerformed(){
+	public void getAllCount_actionPerformed(){
 		getAllAccountsCommand.execute();
 		Collection<Account> accounts = accountsReceiver.getResult();
 		model.setRowCount(0);

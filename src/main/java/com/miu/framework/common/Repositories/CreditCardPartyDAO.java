@@ -17,7 +17,7 @@ public class CreditCardPartyDAO implements PartyDAO{
         dataAccess = new DataAccessFacade();
     }
 
-    public static CreditCardPartyDAO getPartyDAO() {
+    public static PartyDAO getPartyDAO() {
         if (instance == null) {
             synchronized (PartyDAOImpl.class) {
                 if (instance == null) {

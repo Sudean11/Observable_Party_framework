@@ -16,4 +16,7 @@ public interface AccountService  {
     String generateReport();
 
     String getTransaction(String accountNumber);
+
+    AccountService getAccountServiceReferencedBank();
+    AccountService getAccountServiceReferencedCreditCard();
 }

@@ -1,5 +1,6 @@
 package com.miu.framework.common.service;
 import com.miu.framework.bank.entities.Transaction;
+import com.miu.framework.common.Factory.ServiceFactoryImpl;
 import com.miu.framework.common.strategy.StrategyAccountType;
 import com.miu.framework.bank.observer.Observable;
 import com.miu.framework.bank.observer.Observer;
@@ -16,17 +17,45 @@ import java.util.stream.Collectors;
 
 public class AccountServiceImpl implements AccountService, Observable {
 
-	private volatile static AccountServiceImpl instance;
+	private volatile static AccountServiceImpl bankInstance;
+	private volatile static AccountServiceImpl creditCardInstance;
 
-	public static AccountServiceImpl getAccountServiceForBankImpl(){
-		if(Objects.isNull(instance)){
-			synchronized (AccountServiceImpl.class){
-				if(Objects.isNull(instance)){
-					instance = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO(), DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
+	public static AccountServiceImpl getBankServiceFactory() {
+		if (Objects.isNull(bankInstance)) {
+			synchronized (ServiceFactoryImpl.class) {
+				if (Objects.isNull(bankInstance)) {
+					bankInstance = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createAccountDAO(), DAOFactoryImpl.getDAOService().createPartyDAO());
 				}
 			}
 		}
-		return instance;
+		return bankInstance;
+	}
+
+	public static AccountServiceImpl getCreditCardServiceFactory() {
+		if (Objects.isNull(creditCardInstance)) {
+			synchronized (ServiceFactoryImpl.class) {
+				if (Objects.isNull(creditCardInstance)) {
+					creditCardInstance = new AccountServiceImpl(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO(), DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
+				}
+			}
+		}
+		return creditCardInstance;
+	}
+
+	@Override
+	public AccountService getAccountServiceReferencedBank() {
+		AccountServiceImpl accountService = AccountServiceImpl.getBankServiceFactory();
+		accountService.setAccountDAO(DAOFactoryImpl.getDAOService().createAccountDAO());
+		accountService.setPartyDAO(DAOFactoryImpl.getDAOService().createPartyDAO());
+		return accountService;
+	}
+
+	@Override
+	public AccountService getAccountServiceReferencedCreditCard() {
+		AccountServiceImpl accountService = AccountServiceImpl.getCreditCardServiceFactory();
+		accountService.setAccountDAO(DAOFactoryImpl.getDAOService().createCreditCardAccountDAO());
+		accountService.setPartyDAO(DAOFactoryImpl.getDAOService().createCreditCardPartyDAO());
+		return accountService;
 	}
 
 	public void setAccountDAO(AccountDAO accountDAO) {

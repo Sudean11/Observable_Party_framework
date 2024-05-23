@@ -67,7 +67,7 @@ public class Person extends Party implements Serializable {
 
     @Override
     public String getAccountOwnerType(){
-        return ""+this.getClass().getSimpleName().charAt(0);
+        return ""+this.creditAccountType.toString().charAt(0);
     }
 
 

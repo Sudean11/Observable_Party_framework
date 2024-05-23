@@ -45,7 +45,8 @@ public class BankFrm extends javax.swing.JFrame
 	public BankFrm()
 	{
 		myframe = this;
-		bankService = ServiceFactoryImpl.getAccountServiceForBankImpl().getAccountServiceReferencedBank();
+
+		bankService = ServiceFactoryImpl.getBankServiceFactory().getAccountServiceReferencedBank();
 
 		setupConfiguration();
 
@@ -354,7 +355,7 @@ private void setupConfiguration() {
 		getAllCount_actionPerformed();
 	}
 
-	void getAllCount_actionPerformed(){
+	public void getAllCount_actionPerformed(){
 		getAllAccountsCommand.execute();
 		Collection<Account> accounts = accountsReceiver.getResult();
 		model.setRowCount(0);

@@ -23,8 +23,9 @@ public class AppLauncher extends JFrame implements ActionListener {
         commandMap = new HashMap<>();
 
         // Initialize commands
-        BankingButtonCommand bankingButtonCommand = new BankingButtonCommand(new BankFrm());
         CreditCardButtonCommand creditCardButtonCommand = new CreditCardButtonCommand(new CardFrm());
+
+        BankingButtonCommand bankingButtonCommand = new BankingButtonCommand(new BankFrm());
 
         // Map commands to button labels
         commandMap.put("Banking Application", bankingButtonCommand);

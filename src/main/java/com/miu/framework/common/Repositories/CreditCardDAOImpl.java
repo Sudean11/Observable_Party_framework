@@ -16,7 +16,7 @@ public class CreditCardDAOImpl implements AccountDAO {
         dataAccess = new DataAccessFacade();
     }
 
-    public static CreditCardDAOImpl getPartyDAO() {
+    public static AccountDAO getAccountDAO() {
         if (instance == null) {
             synchronized (CreditCardDAOImpl.class) {
                 if (instance == null) {
@@ -49,6 +49,6 @@ public class CreditCardDAOImpl implements AccountDAO {
 
     @Override
     public void update(Account account) {
-        dataAccess.update(account, account.getAccountNumber(), StorageType.ACCOUNTS);
+        dataAccess.update(account, account.getAccountNumber(), StorageType.CREDIT_CARDS);
     }
 }
