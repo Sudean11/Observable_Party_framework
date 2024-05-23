@@ -9,6 +9,8 @@ import com.miu.framework.common.receiver.ResultReceiver;
 import com.miu.framework.common.service.AccountService;
 import com.miu.framework.common.service.AccountServiceImpl;
 import com.miu.framework.common.utils.enums.AccountType;
+import com.miu.framework.creditCard.commands.GenerateReportCommand;
+import com.miu.framework.creditCard.receiver.ReportResultReceiver;
 
 import java.awt.BorderLayout;
 import java.util.Collection;
@@ -39,13 +41,16 @@ public class CardFrm extends javax.swing.JFrame
 	//TODO remove initialization from here
 	AccountService creditService = AccountServiceImpl.getAccountServiceForBankImpl();
 	private ResultReceiver<Collection<Account>> accountsReceiver = new AccountsResultReceiver();
+	private ResultReceiver<String> reportReceiver;
 
 	Command getAllAccountsCommand = new GetAllAccountsCommand(creditService, accountsReceiver);
+
 
 	public CardFrm()
 	{
 		thisframe=this;
-		
+		reportReceiver = new ReportResultReceiver();
+
 		setTitle("Credit-card processing Application.");
 		setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0,0));
@@ -228,7 +233,11 @@ public class CardFrm extends javax.swing.JFrame
 
 	void JButtonGenerateBill_actionPerformed(java.awt.event.ActionEvent event)
 	{
-		JDialogGenBill billFrm = new JDialogGenBill();
+		Command reportGeneratorCommand = new GenerateReportCommand(creditService, reportReceiver);
+		reportGeneratorCommand.execute();
+		String report = reportReceiver.getResult();
+		JDialogGenBill billFrm = new JDialogGenBill(this, report);
+
 		billFrm.setBounds(450, 20, 400, 350);
 		billFrm.show();
 	}
