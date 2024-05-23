@@ -32,6 +32,7 @@ public class JDialogGenBill extends javax.swing.JDialog
 		getContentPane().add(JButton_OK);
 		JButton_OK.setBounds(156,276,96,24);
 
+		System.out.println("Billing:: "+billstring);
 		JTextField1.setText(billstring);
 		//}}
 	

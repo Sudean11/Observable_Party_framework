@@ -138,7 +138,6 @@ public class AccountServiceImpl implements AccountService, Observable {
 				report.append(f.generateReport()+"\n");
 			});
 		});
-		System.out.println(report.toString());
 		return report.toString();
 	}
 

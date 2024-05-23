@@ -83,15 +83,16 @@ public class Account implements Serializable {
     public void addTransaction(Transaction transaction) {
         transactionHistory.add(transaction);
     }
-    public  String generateReport(){
-        return accountTypeStrategy.generateReport(this);
-    };
+//    public  String generateReport(){
+//        return accountTypeStrategy.generateReport(this);
+//    };
 
     public void sendNotification(Account account, double amount, TransactionType transactionType) {
         observerStrategy.notifyUser(account, amount, transactionType);
     }
-    public String generateReport(Account account){
-        return accountTypeStrategy.generateReport(account);
+    public String generateReport(){
+        System.out.println("Generating...");
+        return accountTypeStrategy.generateReport(this);
     }
 
 }

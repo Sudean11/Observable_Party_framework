@@ -14,11 +14,11 @@ public interface StrategyAccountType {
         return 0;
     };
     public default String generateReport(Account account){
+        System.out.println("Infos: "+account.getEmail());
         return " Account Number  : "+account.getAccountNumber()+"\t"+"Account Balance = "+account.getBalance()
                 +"\n"+" Interest = "+ account.getTransactionHistory()
                 .stream().limit(5)
                 .map(f->f.toString())
-                .reduce("",(x,y)->x+"\n"+y)
-                .toString();
+                .reduce("",(x,y)->x+"\n"+y);
     };
 }
