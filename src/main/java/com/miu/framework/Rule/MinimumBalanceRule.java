@@ -1,4 +1,4 @@
-package com.miu.framework.bank.Rule;
+package com.miu.framework.Rule;
 
 import com.miu.framework.common.Rule.Rule;
 import com.miu.observable_party_account.framework.entity.Account;

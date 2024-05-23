@@ -1,4 +1,6 @@
 package com.miu.observable_party_account.framework.service;
+import com.miu.framework.Rule.MinimumBalanceRule;
+import com.miu.framework.common.Rule.RuleEngine;
 import com.miu.observable_party_account.bank.entities.Transaction;
 import com.miu.observable_party_account.framework.strategy.StrategyAccountType;
 import com.miu.observable_party_account.bank.observer.Observable;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 public class AccountServiceImpl implements AccountService, Observable {
 
 	private volatile static AccountServiceImpl instance;
+
+	RuleEngine ruleEngine = new RuleEngine();
 
 	public static AccountServiceImpl getAccountServiceForBankImpl(){
 		if(Objects.isNull(instance)){
@@ -78,10 +82,26 @@ public class AccountServiceImpl implements AccountService, Observable {
 	}
 
 	public void withdraw(String accountNumber, double amount) {
+
+		ruleEngine.addRule(new MinimumBalanceRule(100.00));
 		Account account = accountDAO.loadAccount(accountNumber);
-		account.withdraw(amount);
+		double balance = account.getBalance();
+		if(validateMininmumBalance(amount, account, balance)){
+			account.withdraw(amount);
+		}
 		accountDAO.updateAccount(account);
 		notifyObservers(account, amount, TransactionType.WITHDRAWAL);
+	}
+
+	private  boolean validateMininmumBalance(double amount,Account account, double balance) {
+		if (ruleEngine.validate(account, amount)) {
+			balance += amount;
+			System.out.println("Charged " + amount + ". New balance is " + balance);
+			return true;
+		} else {
+			System.out.println("Charge denied due to rule violation.");
+		}
+		return false;
 	}
 
 	@Override
