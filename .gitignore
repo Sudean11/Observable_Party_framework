@@ -41,4 +41,4 @@ build/
 
 out/
 
-!**/resources/storage/
+!**/resources/storage/*
