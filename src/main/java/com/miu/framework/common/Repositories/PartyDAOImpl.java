@@ -1,5 +1,7 @@
 package com.miu.framework.common.Repositories;
 
+import com.miu.framework.common.Repositories.storage.DataAccessFacade;
+import com.miu.framework.common.Repositories.storage.StorageType;
 import com.miu.framework.common.entity.Party;
 
 import java.util.ArrayList;
@@ -8,45 +10,44 @@ import java.util.List;
 import java.util.Objects;
 
 public class PartyDAOImpl implements PartyDAO {
-    List<Party> parties = new ArrayList<>();
-    private volatile static PartyDAOImpl instance;
-    public static PartyDAOImpl getPartyDAO(){
-        if(Objects.isNull(instance)){
-            synchronized (PartyDAOImpl.class){
-                if(Objects.isNull(instance)){
+    private static volatile PartyDAOImpl instance;
+    private DataAccessFacade dataAccess;
+
+    private PartyDAOImpl() {
+        dataAccess = new DataAccessFacade();
+    }
+
+    public static PartyDAOImpl getPartyDAO() {
+        if (instance == null) {
+            synchronized (PartyDAOImpl.class) {
+                if (instance == null) {
                     instance = new PartyDAOImpl();
                 }
             }
         }
         return instance;
     }
-    public void  save(Party party){
-        saveParty(party);
-    };
-    public void updateParty(Party party){
-        Party Partyexist = loadParty(party.getEmail());
-        if (Partyexist != null) {
-            parties.remove(Partyexist); // remove the old
-            parties.add(party); // add the new
-        }
-    };
-    public Party loadParty(String partyEmail){
-        for (Party party : parties) {
-            if (party.getEmail().equals(partyEmail)) {
-                return party;
-            }
-        }
-        return null;
-    };
-    public Collection<Party> getParties(){
-        return parties;
-    }
 
     @Override
     public void saveParty(Party party) {
-        parties.add(party);
+        dataAccess.save(party, party.getEmail(), StorageType.PARTIES);
     }
-    public void removeParty(Party party){
-        parties.remove(party);
+
+    @Override
+    public void removeParty(Party party) {
+        dataAccess.remove(party.getEmail(), StorageType.PARTIES);
+    }
+
+    @Override
+    public Party loadParty(String partyEmail) {
+        return dataAccess.load(partyEmail, StorageType.PARTIES);
+    }
+
+    @Override
+    public List<Party> getParties() {
+        return dataAccess.getAll(StorageType.PARTIES);
+    }
+    public void updateParty(Party party) {
+        dataAccess.update(party, party.getEmail(), StorageType.CREDIT_PARTIES);
     }
 }

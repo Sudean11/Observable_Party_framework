@@ -6,9 +6,10 @@ import com.miu.framework.bank.entities.Person;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.utils.enums.TransactionType;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class EmailObserver implements Observer{
+public class EmailObserver implements Observer, Serializable {
 
     private EmailObserver(){}
 

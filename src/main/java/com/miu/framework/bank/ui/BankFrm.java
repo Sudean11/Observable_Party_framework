@@ -120,6 +120,7 @@ public class BankFrm extends javax.swing.JFrame
 		JButton_Addinterest.addActionListener(lSymAction);
 		JButton_TransactionHistory.addActionListener(lSymAction);
 
+		getAllCount_actionPerformed();
 	}
 
 private void setupConfiguration() {

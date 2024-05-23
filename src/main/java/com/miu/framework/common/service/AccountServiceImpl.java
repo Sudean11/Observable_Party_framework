@@ -50,7 +50,7 @@ public class AccountServiceImpl implements AccountService, Observable {
 		System.out.println("Amount :: "+amount);
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.deposit(amount);
-		accountDAO.updateAccount(account);
+		accountDAO.update(account);
 		notifyObservers(account, amount, TransactionType.DEPOSIT);
 	}
 
@@ -86,7 +86,7 @@ public class AccountServiceImpl implements AccountService, Observable {
 			notifyObservers(account, amount, TransactionType.WITHDRAWAL);
 			return;
 		}
-		accountDAO.updateAccount(account);
+		accountDAO.update(account);
 		notifyObservers(account, amount, TransactionType.WITHDRAWAL);
 	}
 

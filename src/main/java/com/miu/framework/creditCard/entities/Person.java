@@ -3,7 +3,9 @@ package com.miu.framework.creditCard.entities;
 import com.miu.framework.common.entity.Party;
 import com.miu.framework.common.utils.enums.AccountType;
 
-public class Person extends Party {
+import java.io.Serializable;
+
+public class Person extends Party implements Serializable {
     private String accountNumber;
     private String street;
     private String city;

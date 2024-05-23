@@ -3,7 +3,9 @@ package com.miu.framework.bank.entities;
 import com.miu.framework.common.utils.enums.BankAccountType;
 import com.miu.framework.common.entity.Party;
 
-public class Person extends Party {
+import java.io.Serializable;
+
+public class Person extends Party implements Serializable {
     private String accountNumber;
     private String street;
     private String city;

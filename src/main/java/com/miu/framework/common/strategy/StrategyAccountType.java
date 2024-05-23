@@ -1,6 +1,8 @@
 package com.miu.framework.common.strategy;
 
-public interface StrategyAccountType {
+import java.io.Serializable;
+
+public interface StrategyAccountType{
 
     public double calculateInterest(double amount);
 

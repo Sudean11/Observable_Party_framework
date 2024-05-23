@@ -8,6 +8,7 @@ import com.miu.framework.bank.entities.Transaction;
 import com.miu.framework.common.utils.enums.TransactionType;
 
 import javax.xml.crypto.Data;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
 
 
 
-public class Account {
+public class Account implements Serializable {
     protected String accountNumber;
     protected double balance;
     protected Party owner;

@@ -2,7 +2,9 @@ package com.miu.framework.creditCard.strategy;
 
 import com.miu.framework.common.utils.constants.InterestConstants;
 
-public class StrategyBronze implements StrategyCreditCard {
+import java.io.Serializable;
+
+public class StrategyBronze implements StrategyCreditCard, Serializable {
 
     @Override
     public double getMonthlyInterest() {

@@ -1,21 +1,27 @@
 package com.miu.framework.common.Repositories;
 
 import com.miu.framework.bank.observer.EmailObserver;
+import com.miu.framework.common.Repositories.storage.DataAccessFacade;
+import com.miu.framework.common.Repositories.storage.StorageType;
 import com.miu.framework.common.entity.Account;
+import com.miu.framework.common.entity.Party;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class AccountDAOImpl implements AccountDAO {
-	List<Account> accounts;
+	private static volatile AccountDAOImpl instance;
+	private final DataAccessFacade dataAccess;
 
-	private volatile static AccountDAO instance;
+	private AccountDAOImpl() {
+		dataAccess = new DataAccessFacade();
+	}
 
-	public static AccountDAO getAccountDAO(){
-		if(Objects.isNull(instance)){
-			synchronized (AccountDAO.class){
-				if(Objects.isNull(instance)){
+	public static AccountDAO getAccountDAO() {
+		if (instance == null) {
+			synchronized (AccountDAOImpl.class) {
+				if (instance == null) {
 					instance = new AccountDAOImpl();
 				}
 			}
@@ -23,37 +29,28 @@ public class AccountDAOImpl implements AccountDAO {
 		return instance;
 	}
 
-	public AccountDAOImpl(){
-		this.accounts=new ArrayList<>();
-	}
-	public void saveAccount(Account account) {
-		this.accounts.add(account); // add the new
+	@Override
+	public void save(Account account) {
+		dataAccess.save(account, account.getAccountNumber(), StorageType.ACCOUNTS);
 	}
 
 	@Override
 	public void removeAccount(Account account) {
-		accounts.remove(account);
+		dataAccess.remove(account.getAccountNumber(), StorageType.ACCOUNTS);
 	}
 
-	public void  save(Account account){
-		accounts.add(account);
-	};
-	public void updateAccount(Account account){
-		Account accountexist = loadAccount(account.getAccountNumber());
-		if (accountexist != null) {
-			accounts.remove(accountexist);
-			accounts.add(account);
-		}
-	};
-	public Account loadAccount(String accountnumber){
-		for (Account account : accounts) {
-			if (Objects.equals(account.getAccountNumber(), accountnumber)) {
-				return account;
-			}
-		}
-		return null;
-	};
-	public List<Account> getAccounts(){
-		return accounts;
-	};
+	@Override
+	public Account loadAccount(String accountNumber) {
+		return dataAccess.load(accountNumber, StorageType.ACCOUNTS);
+	}
+
+	@Override
+	public List<Account> getAccounts() {
+		return dataAccess.getAll(StorageType.ACCOUNTS);
+	}
+
+	@Override
+	public void update(Account account) {
+		dataAccess.update(account, account.getAccountNumber(), StorageType.ACCOUNTS);
+	}
 }

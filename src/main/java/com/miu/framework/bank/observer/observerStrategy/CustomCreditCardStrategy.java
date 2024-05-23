@@ -3,7 +3,9 @@ package com.miu.framework.bank.observer.observerStrategy;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.utils.enums.TransactionType;
 
-public class CustomCreditCardStrategy implements ObserverStrategy{
+import java.io.Serializable;
+
+public class CustomCreditCardStrategy implements ObserverStrategy, Serializable {
 
     @Override
     public void notifyUser(Account account, double amount, TransactionType transactionType) {

@@ -4,7 +4,9 @@ import com.miu.framework.bank.entities.Company;
 import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.utils.enums.TransactionType;
 
-public class CustomBankingStrategy implements ObserverStrategy{
+import java.io.Serializable;
+
+public class CustomBankingStrategy implements ObserverStrategy, Serializable {
 
     @Override
     public void notifyUser(Account account, double amount, TransactionType transactionType) {

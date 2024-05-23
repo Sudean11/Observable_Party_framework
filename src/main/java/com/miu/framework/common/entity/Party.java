@@ -2,10 +2,11 @@ package com.miu.framework.common.entity;
 
 import com.miu.framework.bank.observer.observerStrategy.ObserverStrategy;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Party {
+public abstract class Party implements Serializable {
 
     protected String name;
     protected String email;

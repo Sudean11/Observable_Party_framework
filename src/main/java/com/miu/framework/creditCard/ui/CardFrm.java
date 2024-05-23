@@ -105,7 +105,8 @@ public class CardFrm extends javax.swing.JFrame
 		JButton_GenBill.addActionListener(lSymAction);
 		JButton_Deposit.addActionListener(lSymAction);
 		JButton_Withdraw.addActionListener(lSymAction);
-		
+		getAllCount_actionPerformed();
+
 	}
 
 	

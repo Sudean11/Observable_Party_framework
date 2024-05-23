@@ -6,11 +6,12 @@ import com.miu.framework.common.entity.Account;
 import com.miu.framework.common.entity.Party;
 import com.miu.framework.creditCard.strategy.StrategyCreditCard;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.stream.Stream;
 
-public abstract class CreditAccount extends Account {
+public abstract class CreditAccount extends Account implements Serializable {
     StrategyCreditCard cardStrategy;
     public CreditAccount(String accountNumber, Party owner,StrategyCreditCard cardStrategy) {
         super(accountNumber, owner,cardStrategy);

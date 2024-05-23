@@ -2,10 +2,11 @@ package com.miu.framework.bank.entities;
 
 import com.miu.framework.common.utils.enums.TransactionType;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class Transaction {
+public class Transaction implements Serializable {
     private Date date;
     private double amount;
     private TransactionType type;
