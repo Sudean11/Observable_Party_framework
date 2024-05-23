@@ -363,7 +363,7 @@ private void setupConfiguration() {
 			rowdata[1] = account.getOwner().getName();
 			rowdata[2] = account.getOwner().getCity();
 			rowdata[3] = account.getOwner().getAccountOwnerType();
-			rowdata[4] = account.getOwner().getAccountType();
+			rowdata[4] = account.getOwner().getAccountType().trim().equals("C") ? "Ch" : account.getOwner().getAccountType();
 			rowdata[5] = Double.toString(account.getBalance());
 			model.addRow(rowdata);
 		}
