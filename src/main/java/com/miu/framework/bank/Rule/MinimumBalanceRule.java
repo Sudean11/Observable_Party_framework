@@ -1,7 +1,7 @@
 package com.miu.framework.bank.Rule;
 
 import com.miu.framework.common.Rule.Rule;
-import com.miu.framework.common.entity.Account;
+import com.miu.observable_party_account.framework.entity.Account;
 
 public class MinimumBalanceRule implements Rule {
     private double minimumBalance;
